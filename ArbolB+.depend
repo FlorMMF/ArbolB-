@@ -16,3 +16,20 @@
 1746997312 c:\users\surface\documents\estructura de datos\arbolb+\cola.tpp
 	<iostream>
 
+1746998239 source:c:\users\thinkpad\arbolb-\main.cpp
+	<iostream>
+	"ArbolB.hpp"
+
+1747006067 c:\users\thinkpad\arbolb-\arbolb.hpp
+	"ArbolB.tpp"
+
+1747006116 c:\users\thinkpad\arbolb-\arbolb.tpp
+	"Cola.hpp"
+	<iostream>
+
+1746998239 c:\users\thinkpad\arbolb-\cola.hpp
+	"Cola.tpp"
+
+1746998239 c:\users\thinkpad\arbolb-\cola.tpp
+	<iostream>
+

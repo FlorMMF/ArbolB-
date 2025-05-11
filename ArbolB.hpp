@@ -119,7 +119,7 @@ private:
      *
      * \param subraiz Nodo*&, Referencia al nodo que ser&aacute; dividido.
      * \return void
-     * 
+     *
     */
     void Split(Nodo *& subraiz);
     /** \brief Encuentra el nodo padre de un nodo dado en el &aacute;rbol.
@@ -127,7 +127,7 @@ private:
      * \param actual Nodo*, Nodo desde el cual comienza la b&uacute;squeda.
      * \param hijo Nodo*, Nodo cuyo padre se est&aacute; buscando.
      * \return Nodo*, El nodo padre, o `nullptr` si el nodo es la ra&iacute;z.
-     * 
+     *
     */
     Nodo* BuscarPadre(Nodo* actual, Nodo* hijo);
     /** \brief Inserta una clave en el nodo padre y reorganiza los hijos adecuadamente.
@@ -137,7 +137,7 @@ private:
      * \param der Nodo*, Nodo derecho resultante de la divisi&oacute;n.
      * \param padre Nodo*, Nodo padre al que se a&ntildeadir&aacute; la clave promovida.
      * \return void
-     * 
+     *
      */
     void AgregarPadre(T clave, Nodo* izq, Nodo* der, Nodo* padre);
     /** \brief M&eacute;todo que imprime por niveles un &aacute;rbol B
@@ -173,27 +173,29 @@ private:
      * \param nodo Nodo*, Nodo hoja del cual se eliminar&aacute; el valor.
      * \param posicion int, &iacute;ndice en el nodo donde se encuentra la clave a eliminar.
      * \return void
-     * 
+     *
     */
     void EliminarHoja(Nodo* nodo, int posicion);
-    /** \brief Redistribuye claves entre nodos hermanos para mantener balance. 
+    /** \brief Redistribuye claves entre nodos hermanos para mantener balance.
      *
      * \param nodo Nodo*, Nodo que necesita redistribuci&oacute;n.
      * \param padre Nodo*, Nodo padre que contiene el enlace entre los nodos hermanos.
      * \return void
-     * 
+     *
     */
-    void Redistribuir(Nodo* nodo, Nodo* padre);
+    void Redistribuir(Nodo* nodo, Nodo* padre, int posPadre);
     /** \brief Fusiona dos nodos cuando la redistribuci&oacute;n no es posible.
      *
      * \param nodo Nodo*, Nodo que ser&aacute; fusionado con su hermano.
      * \param padre Nodo*, Nodo padre que contiene el enlace entre los nodos hermanos.
      * \param posPadre int, &iacute;ndice en el padre donde se encuentra el enlace con el nodo.
      * \return void
-     * 
+     *
     */
     void Fusionar(Nodo* nodo, Nodo* padre, int posPadre);
-    
+
+    int BuscarPosPadre(Nodo*  Hijo, Nodo* padre);
+
 
 };
 #include "ArbolB.tpp"
