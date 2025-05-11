@@ -36,6 +36,7 @@ void ArbolB<T, grado>::Agregar(T valor){
         raiz->esHoja = true;
         cantClaves++;
     }else{
+
         Agregar(valor, raiz);
     }
 }
@@ -51,7 +52,7 @@ void ArbolB<T, grado>::Eliminar(T valor){
         while (i < hoja->cantValores && valor >= hoja->clave[i]) i++;
         hoja = hoja->hijo[i];
     }
-    
+
     int posicion = -1;
     for (int i = 0; i < hoja->cantValores; ++i){
         if(hoja->clave[i] ==valor){
@@ -60,13 +61,13 @@ void ArbolB<T, grado>::Eliminar(T valor){
         }
     }
     if (posicion == -1) throw "Error: el valor no se ha encontrado en la hoja.";
-    
+
     //Se elimina el valor desplazando elementos
     for (int i = posicion; i < hoja->cantValores - 1; ++i){
         hoja->clave[i] = hoja->clave[i + 1];
     }
     hoja->cantValores--;
-    
+
     //Si queda por debajo del minimo permitido se distribuye o fusiona
     if (hoja->cantValores < (grado - 1) / 2 && hoja != raiz){
         Nodo* padre = BuscarPadre(raiz, hoja);
@@ -74,12 +75,13 @@ void ArbolB<T, grado>::Eliminar(T valor){
         Redistribuir(hoja, padre);
         Fusionar(hoja, padre, posPadre);
     }
-    
+
     //Si la raíz está vacia y por alguna razó no tiene hijos, entonces el arbol queda vacio
     if (raiz->cantValores == 0 && !raiz->hijo[0]){
         delete raiz;
         raiz = nullptr;
     }
+    cantClaves--;
 }
 
 template <typename T, int grado>
@@ -135,13 +137,15 @@ void ArbolB<T, grado>::Agregar(T valor, Nodo*& subraiz){
         int i;
         for (i = subraiz->cantValores - 1; i >= 0 && subraiz->clave[i] > valor; --i){
             subraiz->clave[i + 1] = subraiz->clave[i];
+
         }
         subraiz->clave[i + 1] = valor;
         subraiz->cantValores++;
-        
+
         //Si el nodo hoja está lleno esntonces se divide
         if (subraiz->cantValores == grado){
             Split(subraiz);
+            cantClaves++;
         }
         cantClaves++;
     }else {
@@ -149,7 +153,10 @@ void ArbolB<T, grado>::Agregar(T valor, Nodo*& subraiz){
         int i = 0;
         while (i < subraiz->cantValores && valor > subraiz->clave[i]) i++;
         Agregar(valor, subraiz->hijo[i]);
+
+
     }
+
 }
 template <typename T, int grado>
 typename ArbolB<T, grado>::Nodo* ArbolB<T, grado>::BuscarPadre(Nodo* actual, Nodo* hijo){
@@ -188,7 +195,7 @@ void ArbolB<T, grado>::Split(Nodo*& subraiz){
     int medio = grado / 2;
     Nodo* nuevoNodo = new Nodo();
     nuevoNodo->esHoja = subraiz->esHoja;
-    
+
     //Si es un nodo hoja se mueven los valores
     if (subraiz->esHoja){
         for (int i = medio; i < subraiz->cantValores; ++i){
@@ -196,11 +203,11 @@ void ArbolB<T, grado>::Split(Nodo*& subraiz){
         }
         nuevoNodo->cantValores = subraiz->cantValores - medio;
         subraiz->cantValores = medio;
-        
-        //Se enlazan los nodos hoja   
+
+        //Se enlazan los nodos hoja
         nuevoNodo->siguiente = subraiz->siguiente;
         subraiz->siguiente = nuevoNodo;
-        
+
         T clavePromovida = nuevoNodo->clave[0];
         if (subraiz == raiz){
             //Si es la raiz pues se crea un nuevo nodo raiz
@@ -397,7 +404,7 @@ void ArbolB<T, grado>::Redistribuir(Nodo* nodo, Nodo* padre) {
         if (hermanoDer->cantValores > (grado - 1) / 2) {
             nodo->clave[nodo->cantValores] = padre->clave[posPadre];
             padre->clave[posPadre] = hermanoDer->clave[0];
-            
+
             for (int i = 0; i < hermanoDer->cantValores - 1; ++i) {
                 hermanoDer->clave[i] = hermanoDer->clave[i + 1];
             }
@@ -416,9 +423,9 @@ template <typename T, int grado>
 void ArbolB<T, grado>::Fusionar(Nodo* nodo, Nodo* padre, int posPadre){
     Nodo* hermano = (posPadre > 0) ? padre->hijo[posPadre - 1] : padre->hijo[posPadre + 1];
     bool esIzquierdo = (posPadre > 0);
-    
+
     if (hermano->cantValores + nodo->cantValores >= grado - 1) throw "Error: Nodo hermano sin espacio suficiente para fusionar.";
-    
+
     //Se fusionan claves en el nodo hermano
     hermano->clave[hermano->cantValores] = padre->clave[esIzquierdo ? posPadre - 1 : posPadre];
     hermano->cantValores++;
