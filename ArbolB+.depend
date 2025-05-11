@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1746997312 source:c:\users\surface\documents\estructura de datos\arbolb+\main.cpp
+	<iostream>
+	"ArbolB.hpp"
+
+1746997312 c:\users\surface\documents\estructura de datos\arbolb+\arbolb.hpp
+	"ArbolB.tpp"
+
+1746997312 c:\users\surface\documents\estructura de datos\arbolb+\arbolb.tpp
+	"Cola.hpp"
+	<iostream>
+
+1746997312 c:\users\surface\documents\estructura de datos\arbolb+\cola.hpp
+	"Cola.tpp"
+
+1746997312 c:\users\surface\documents\estructura de datos\arbolb+\cola.tpp
+	<iostream>
+
