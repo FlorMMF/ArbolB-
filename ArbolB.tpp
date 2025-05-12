@@ -71,8 +71,10 @@ void ArbolB<T, grado>::Eliminar(T valor){
     //Si queda por debajo del minimo permitido se distribuye o fusiona
     if (hoja->cantValores < (grado - 1) / 2 && hoja != raiz){
         Nodo* padre = BuscarPadre(raiz, hoja);
-        int posPadre = 0;
-        Redistribuir(hoja, padre);
+
+            //se busca la posicion del padre
+        int posPadre=BuscarPosPadre(hoja, padre);
+        Redistribuir(hoja, padre, posPadre);
         Fusionar(hoja, padre, posPadre);
     }
 
@@ -122,11 +124,15 @@ int ArbolB<T, grado>:: ObtenerNumClaves()const{
 template <typename T, int grado>
 void ArbolB<T, grado>:: ImprimirAsc()const{
     ImprimirAsc(raiz);
+    std::cout<<"\b\b ";
+
 }
 
 template <typename T, int grado>
 void ArbolB<T, grado>:: ImprimirDes()const{
     ImprimirDes(raiz);
+    std::cout<<"\b\b ";
+
 }
 //Métodos privados
 
@@ -231,21 +237,30 @@ void ArbolB<T, grado>::ImprimirNivel(Nodo* subraiz) const{
     if (subraiz != nullptr){
         cola.Encolar(subraiz);
         while (!cola.EstaVacia()){
-            Nodo* actual = cola.ObtenerPrimero();
-            actual->ImprimirNodo();
+            int nivelTam=cola.CantidadElementos();
+
+            for(int i=0; i<nivelTam; ++i){
+                Nodo* actual = cola.ObtenerPrimero();
+
+                actual->ImprimirNodo();
+                cola.Desencolar();
+
+                if(!actual->esHoja){
+                    for (int i = 0; i <= actual->cantValores; ++i){
+                        if (actual->hijo[i] != nullptr){
+                            cola.Encolar(actual->hijo[i]);
+                        }
+                    }
 
 
-            cola.Desencolar();
-
-            for (int i = 0; i <= actual->cantValores; ++i){
-                if (actual->hijo[i] != nullptr){
-                    cola.Encolar(actual->hijo[i]);
                 }
             }
 
+            std::cout << std::endl;
         }
+
     }
-    std::cout << std::endl;
+
 }
 
 template <typename T, int grado>
@@ -269,7 +284,7 @@ void ArbolB<T, grado>::Nodo::ImprimirNodo() const{
     for (int i = 0; i < cantValores; ++i){
         std::cout << clave[i] << ", ";
     }
-    std::cout << ']';
+    std::cout <<"\b\b] ";
 }
 
 template <typename T, int grado>
@@ -365,21 +380,9 @@ void ArbolB<T, grado>::EliminarHoja(Nodo* nodo, int posicion){
 }
 
 template <typename T, int grado>
-void ArbolB<T, grado>::Redistribuir(Nodo* nodo, Nodo* padre) {
+void ArbolB<T, grado>::Redistribuir(Nodo* nodo, Nodo* padre, int posPadre) {
     if (!nodo || !padre) {
         throw "Error: Nodo o padre inv\240lidos";
-    }
-
-    int posPadre = -1;
-    for (int i = 0; i <= padre->cantValores; ++i) {
-        if (padre->hijo[i] == nodo) {
-            posPadre = i;
-            break;
-        }
-    }
-
-    if (posPadre == -1) {
-        throw "Error: No se pudo encontrar la posici\243n del nodo en su padre.";
     }
 
     // Intentar redistribuir con el hermano izquierdo
@@ -448,11 +451,29 @@ void ArbolB<T, grado>::Fusionar(Nodo* nodo, Nodo* padre, int posPadre){
     //Si el padre queda por debajo del minimo se intenta redistribuir
     if (padre->cantValores < (grado - 1) / 2 && padre != raiz){
         Nodo* abuelo = BuscarPadre(raiz, padre);
-        Redistribuir(padre, abuelo);
+        int posAbuelo= BuscarPosPadre(padre,abuelo);
+        Redistribuir(padre, abuelo, posAbuelo);
     }
     //Si la raiz queda vacia se ajusta el arbol
     if (padre == raiz && padre->cantValores == 0){
         raiz = hermano;
         delete padre;
     }
+}
+
+template <typename T, int grado>
+int ArbolB<T, grado>::BuscarPosPadre(Nodo*  Hijo, Nodo* padre){
+    int posPadre = -1;
+
+    for (int i = 0; i <= padre->cantValores; ++i) {
+        if (padre->hijo[i] == Hijo) {
+            posPadre = i;
+                break;
+        }
+    }
+
+    if (posPadre == -1) {
+        throw "Error: No se pudo encontrar la posici\243n del nodo en su padre.";
+    }else return posPadre;
+
 }
