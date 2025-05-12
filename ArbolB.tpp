@@ -74,7 +74,7 @@ void ArbolB<T, grado>::Eliminar(T valor){
             //se busca la posicion del padre
         int posPadre=BuscarPosPadre(hoja, padre);
         Redistribuir(hoja, padre, posPadre);
-        Fusionar(hoja, padre, posPadre);
+        Fusionar(hoja, padre, posPadre, valor);
     }
 
     //Si la raíz está vacia y por alguna razó no tiene hijos, entonces el arbol queda vacio
@@ -411,47 +411,69 @@ void ArbolB<T, grado>::Redistribuir(Nodo* nodo, Nodo* padre, int posPadre) {
     }
 
     // Se fusiona si no se puede redistribuir
-    Fusionar(nodo, padre, posPadre);
+    //Fusionar(nodo, padre, posPadre, valor);
 }
 
 
 template <typename T, int grado>
-void ArbolB<T, grado>::Fusionar(Nodo* nodo, Nodo* padre, int posPadre){
-    Nodo* hermano = (posPadre > 0) ? padre->hijo[posPadre - 1] : padre->hijo[posPadre + 1];
-    bool esIzquierdo = (posPadre > 0);
+void ArbolB<T, grado>::Fusionar(Nodo* nodo, Nodo* padre, int posPadre, T valor){
+    Nodo* hermano = (posPadre == 0 && nodo == padre -> hijo[0]) ? padre->hijo[1] : padre->hijo[posPadre];
 
-    if (hermano->cantValores + nodo->cantValores >= grado - 1) throw "Error: Nodo hermano sin espacio suficiente para fusionar.";
+    if(nodo == padre -> hijo[0]){
+    //si el nodo es el primero y por lo tanto el hermano es el derecho y no el izquierdo
+        for (int i = 0; i < nodo->cantValores; ++i){
+            nodo->clave[hermano->cantValores] = nodo->clave[i];
+            hermano->cantValores++;
+        }
 
-    //Se fusionan claves en el nodo hermano
-    hermano->clave[hermano->cantValores] = padre->clave[esIzquierdo ? posPadre - 1 : posPadre];
-    hermano->cantValores++;
-    for (int i = 0; i < nodo->cantValores; ++i){
-        hermano->clave[hermano->cantValores] = nodo->clave[i];
-        hermano->cantValores++;
-    }
-    //Si son nodos hojas se mantiene el enlace entre ellos
-    if (nodo->esHoja){
-        hermano->siguiente = nodo->siguiente;
-    }
-    //Se actualiza el nodo padre eliminando la clave que se acaba de fusionar
-    for (int i = esIzquierdo ? posPadre - 1 : posPadre; i < padre->cantValores - 1; ++i){
-        padre->clave[i] = padre->clave[i + 1];
-        padre->hijo[i + 1] = padre->hijo[i + 2];
-    }
+    }else{
+        //se elimina el valor del nodo
+        //si el valor que esta en el nodo es el mismo del padre se reemplaza primero
+        if(valor == padre -> clave[posPadre]){
+            padre -> clave[posPadre] = nodo -> clave[1];
+            for (int i = 0; i < nodo->cantValores - 1; ++i){
+                nodo->clave[i] = nodo->clave[i + 1];
+            }
+            --(nodo->cantValores);
+        }
 
-    padre->cantValores--;
-    delete nodo;
-    //Si el padre queda por debajo del minimo se intenta redistribuir
-    if (padre->cantValores < (grado - 1) / 2 && padre != raiz){
-        Nodo* abuelo = BuscarPadre(raiz, padre);
-        int posAbuelo= BuscarPosPadre(padre,abuelo);
-        Redistribuir(padre, abuelo, posAbuelo);
-    }
-    //Si la raiz queda vacia se ajusta el arbol
-    if (padre == raiz && padre->cantValores == 0){
-        raiz = hermano;
-        delete padre;
-    }
+        for(int i = 0; i < nodo->cantValores; ++i){
+            hermano->clave[hermano->cantValores] = nodo->clave[i];
+            hermano->cantValores++;
+        }
+            //Si son nodos hojas se mantiene el enlace entre ellos
+        if (nodo->esHoja){
+            hermano->siguiente = nodo->siguiente;
+        }
+        //Se actualiza el nodo padre eliminando la clave que se acaba de fusionar
+        for (int i = posPadre; i < padre->cantValores - 1; ++i){
+            padre->clave[i] = padre->clave[i + 1];
+            padre->hijo[i + 1] = padre->hijo[i + 2];
+        }
+
+        padre->cantValores--;
+        delete nodo;
+
+   }
+
+
+//    //Se fusionan claves en el nodo hermano
+//    hermano->clave[hermano->cantValores] = padre->clave[esIzquierdo ? posPadre - 1 : posPadre];
+//    hermano->cantValores++;
+//
+
+
+//    //Si el padre queda por debajo del minimo se intenta redistribuir
+//    if (padre->cantValores < (grado - 1) / 2 && padre != raiz){
+//        Nodo* abuelo = BuscarPadre(raiz, padre);
+//        int posAbuelo= BuscarPosPadre(padre,abuelo);
+//        Redistribuir(padre, abuelo, posAbuelo);
+//    }
+//    //Si la raiz queda vacia se ajusta el arbol
+//    if (padre == raiz && padre->cantValores == 0){
+//        raiz = hermano;
+//        delete padre;
+//    }
 }
 
 template <typename T, int grado>

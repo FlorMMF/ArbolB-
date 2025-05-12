@@ -192,7 +192,7 @@ private:
      * \return void
      *
     */
-    void Fusionar(Nodo* nodo, Nodo* padre, int posPadre);
+    void Fusionar(Nodo* nodo, Nodo* padre, int posPadre, T valor);
 
     int BuscarPosPadre(Nodo*  Hijo, Nodo* padre);
 

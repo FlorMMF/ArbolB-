@@ -14,20 +14,20 @@ int main()
             arbol.Agregar(val);
         }
         cout << "Claves en el \240rbol: " << arbol.ObtenerNumClaves() << endl;
-        
+
         cout << "\n=== Imprimir en nivel ===" << endl;
         arbol.ImprimirNivel();
-        
+
         cout << "\n=== Imprimir en por orden ascendente ===" << endl;
         arbol.ImprimirAsc();
         cout << endl;
-        
+
         cout << "\n=== Imprimir en por orden descendente ===" << endl;
         arbol.ImprimirDes();
         cout << endl;
 
         cout << "\n=== Prueba de Eliminaci\242n ===" << endl;
-        int eliminarValores[] = {6, 7, 12, 5};
+        int eliminarValores[] = {6,10, 12, 20};
         for (int val : eliminarValores) {
             cout << "Eliminando: " << val << endl;
             arbol.Eliminar(val);
