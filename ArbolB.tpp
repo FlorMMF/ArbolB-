@@ -36,6 +36,7 @@ void ArbolB<T, grado>::Agregar(T valor){
         raiz->esHoja = true;
         cantClaves++;
     }else{
+
         Agregar(valor, raiz);
     }
 }
@@ -82,6 +83,7 @@ void ArbolB<T, grado>::Eliminar(T valor){
         delete raiz;
         raiz = nullptr;
     }
+    cantClaves--;
 }
 
 template <typename T, int grado>
@@ -141,6 +143,7 @@ void ArbolB<T, grado>::Agregar(T valor, Nodo*& subraiz){
         int i;
         for (i = subraiz->cantValores - 1; i >= 0 && subraiz->clave[i] > valor; --i){
             subraiz->clave[i + 1] = subraiz->clave[i];
+
         }
         subraiz->clave[i + 1] = valor;
         subraiz->cantValores++;
@@ -148,6 +151,7 @@ void ArbolB<T, grado>::Agregar(T valor, Nodo*& subraiz){
         //Si el nodo hoja está lleno esntonces se divide
         if (subraiz->cantValores == grado){
             Split(subraiz);
+            cantClaves++;
         }
         cantClaves++;
     }else {
@@ -155,7 +159,10 @@ void ArbolB<T, grado>::Agregar(T valor, Nodo*& subraiz){
         int i = 0;
         while (i < subraiz->cantValores && valor > subraiz->clave[i]) i++;
         Agregar(valor, subraiz->hijo[i]);
+
+
     }
+
 }
 template <typename T, int grado>
 typename ArbolB<T, grado>::Nodo* ArbolB<T, grado>::BuscarPadre(Nodo* actual, Nodo* hijo){

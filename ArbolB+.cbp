@@ -32,6 +32,10 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="ArbolB.hpp" />
+		<Unit filename="ArbolB.tpp" />
+		<Unit filename="Cola.hpp" />
+		<Unit filename="Cola.tpp" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
