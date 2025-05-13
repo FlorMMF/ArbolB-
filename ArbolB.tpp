@@ -432,6 +432,19 @@ void ArbolB<T, grado>::Fusionar(Nodo* nodo, Nodo* padre, int posPadre, T valor){
             nodo->clave[hermano->cantValores] = nodo->clave[i];
             hermano->cantValores++;
         }
+            //Si son nodos hojas se mantiene el enlace entre ellos
+        if (nodo->esHoja){
+            nodo->siguiente = hermano->siguiente;
+        }
+
+         //Se actualiza el nodo padre eliminando la clave que se acaba de fusionar
+        for (int i = posPadre; i < padre->cantValores - 1; ++i){
+            padre->clave[i] = padre->clave[i + 1];
+            padre->hijo[i + 1] = padre->hijo[i + 2];
+        }
+
+        padre->cantValores--;
+        delete hermano;
 
     }else{
         //se elimina el valor del nodo
