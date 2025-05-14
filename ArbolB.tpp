@@ -134,7 +134,7 @@ void ArbolB<T, grado>:: ImprimirDes()const{
     std::cout<<"\b\b ";
 
 }
-//Métodos privados
+///Métodos privados *********************************************************************************************
 
 template <typename T, int grado>
 void ArbolB<T, grado>::Agregar(T valor, Nodo*& subraiz){
@@ -344,27 +344,45 @@ typename ArbolB<T, grado>::Nodo* ArbolB<T, grado>::BuscarDirMayor(Nodo* subraiz)
 
 template <typename T, int grado>
 void ArbolB<T, grado>:: ImprimirAsc(Nodo * subraiz)const{
-    if(subraiz!= nullptr){
+    if(subraiz != nullptr){
 
-        for (int i = 0; i < subraiz->cantValores; ++i){
-            ImprimirAsc(subraiz->hijo[i]);
-            std::cout << subraiz ->clave[i] << ", ";
+
+        Nodo* hoja = subraiz;
+        while (!hoja->esHoja && hoja->hijo[hoja->cantValores] != nullptr){
+            hoja = hoja->hijo[0];
         }
-        ImprimirAsc(subraiz->hijo[subraiz -> cantValores]);
+
+        ///********
+        while(hoja != nullptr){
+            for(int i =0;i < hoja->cantValores; ++i){
+                std::cout << hoja->clave[i] << ", ";
+            }
+            hoja = hoja->siguiente;
+        }
+        ///****
+
+
     }
+
 
 }
 
 template <typename T, int grado>
 void ArbolB<T, grado>:: ImprimirDes(Nodo * subraiz)const{
     if(subraiz!= nullptr){
-        ImprimirDes(subraiz->hijo[subraiz -> cantValores]);
-        for (int i = subraiz ->cantValores -1; i >= 0; --i){
-            std::cout << subraiz ->clave[i] << ", ";
-            ImprimirDes(subraiz->hijo[i]);
-
+        ///***
+        if(!subraiz->esHoja){
+            for(int i = subraiz->cantValores; i >= 0;--i){
+                ImprimirDes(subraiz->hijo[i]);
+            }
+        }else{
+            for(int i = subraiz->cantValores - 1; i >= 0; --i){
+                std::cout << subraiz->clave[i] << ", ";
+            }
         }
-    }
+
+   }
+
 
 }
 

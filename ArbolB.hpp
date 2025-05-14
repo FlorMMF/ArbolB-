@@ -5,11 +5,13 @@ template <typename T, int grado = 5>
 
 class ArbolB{
 public:
+
     /** \brief Constructor de la clase
      *
      *
      */
     ArbolB();
+
     /** \brief Constructor de copias de la clase
      *
      * \param ArbolB<T const
@@ -17,11 +19,13 @@ public:
      *
      */
     ArbolB(const ArbolB<T,grado> & aB);
+
     /** \brief Destructor de la clase
      *
      *
      */
     ~ArbolB();
+
     /** \brief Operador igual para copiar un &aacute;rbol B
      *
      * \param const ArbolB<T, grado> & aB
@@ -29,6 +33,7 @@ public:
      *
      */
     ArbolB & operator= (const ArbolB<T, grado> & aB);
+
     /** \brief Agrega un valor al Arbol B
      *
      * \param valor T
@@ -36,6 +41,7 @@ public:
      *
      */
     void Agregar(T valor);
+
     /** \brief Elimina un elemento del &aacute;rbol B
      *
      * \param valor T
@@ -49,12 +55,14 @@ public:
      *
      */
     void Vaciar();
+
     /** \brief Imprime por niveles el &aacute;rbol b
      *
      * \return void
      *
      */
     void ImprimirNivel()const;
+
     /** \brief Busca un elemento en el &aacute;rbol
      *
      * \param valor T, el valor que va a buscar
@@ -62,21 +70,23 @@ public:
      *
      */
     bool Buscar(T valor)const;
+
     /** \brief M&eacute;todo para obtener la cantidad de elementos que tiene el &aacute;rbol
      *
      * \return int
      *
      */
     int ObtenerNumClaves()const;
+
     /** \brief Imprime del valor m&aacute;s chico al m&aacute;s grande
      *
-     * \return void
+     * \return nada
      *
      */
     void ImprimirAsc()const;
     /** \brief Imprime del valor m&aacute;s grande al m&aacute;s chico
      *
-     * \return void
+     * \return nada
      *
      */
     void ImprimirDes()const;

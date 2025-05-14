@@ -5,7 +5,9 @@ using namespace std;
 int main()
 {
     try{
-        ArbolB<int, 5> arbol, arbol2;
+        ArbolB<int, 5> arbol, arbol2, ar;
+
+
 
         cout << "=== Prueba de Inserci\242n ===" << endl;
         int valores[] = {10, 20, 5, 6, 15, 30, 25, 35, 3, 7, 12, 17, 22, 27, 32};
@@ -25,16 +27,17 @@ int main()
         cout << "\n=== Imprimir en por orden descendente ===" << endl;
         arbol.ImprimirDes();
         cout << endl;
+        cout<<"Buscando valor: " <<boolalpha<< arbol.Buscar(10)<<endl;
 
-        cout << "\n=== Prueba de Eliminaci\242n ===" << endl;
-        int eliminarValores[] = {6,10, 12, 20};
-        for (int val : eliminarValores) {
-            cout << "Eliminando: " << val << endl;
-            arbol.Eliminar(val);
-            arbol.ImprimirNivel();
-            cout << "Claves en el \240rbol: " << arbol.ObtenerNumClaves() << endl;
-            cout << endl;
-        }
+//        cout << "\n=== Prueba de Eliminaci\242n ===" << endl;
+//        int eliminarValores[] = {6,10, 12, 20};
+//        for (int val : eliminarValores) {
+//            cout << "Eliminando: " << val << endl;
+//            arbol.Eliminar(val);
+//            arbol.ImprimirNivel();
+//            cout << "Claves en el \240rbol: " << arbol.ObtenerNumClaves() << endl;
+//            cout << endl;
+//        }
 
         cout << "\n=== Copiar un \240rbol ===" << endl;
         arbol2 = arbol;
@@ -43,6 +46,8 @@ int main()
         cout << "\n=== Prueba de Vaciar \265rbol ===" << endl;
         arbol.Vaciar();
         cout << "Claves despu\202s de vaciar: " << arbol.ObtenerNumClaves() << endl;
+
+
     } catch (const char* mensaje) {
         cerr << mensaje << endl;
     }
