@@ -6,7 +6,7 @@
 1747086318 c:\users\surface\documents\estructura de datos\arbolb+\arbolb.hpp
 	"ArbolB.tpp"
 
-1747086610 c:\users\surface\documents\estructura de datos\arbolb+\arbolb.tpp
+1747156575 c:\users\surface\documents\estructura de datos\arbolb+\arbolb.tpp
 	"Cola.hpp"
 	<iostream>
 
@@ -31,5 +31,22 @@
 	"Cola.tpp"
 
 1746998828 c:\users\lara_\onedrive\documents\uni\4to semestre\estructura de datos\proyecto b+\arbolb-\cola.tpp
+	<iostream>
+
+1747198536 source:c:\users\thinkpad\arbolb-\main.cpp
+	<iostream>
+	"ArbolB.hpp"
+
+1747184671 c:\users\thinkpad\arbolb-\arbolb.hpp
+	"ArbolB.tpp"
+
+1747198427 c:\users\thinkpad\arbolb-\arbolb.tpp
+	"Cola.hpp"
+	<iostream>
+
+1746998239 c:\users\thinkpad\arbolb-\cola.hpp
+	"Cola.tpp"
+
+1746998239 c:\users\thinkpad\arbolb-\cola.tpp
 	<iostream>
 

@@ -53,6 +53,7 @@ void ArbolB<T, grado>::Eliminar(T valor){
         hoja = hoja->hijo[i];
     }
 
+    //Se busca la posicion de la clave en la hoja que encontramos
     int posicion = -1;
     for (int i = 0; i < hoja->cantValores; ++i){
         if(hoja->clave[i] ==valor){
@@ -60,6 +61,8 @@ void ArbolB<T, grado>::Eliminar(T valor){
             break;
         }
     }
+
+    //si no encontramos la clave en la hoja la clave no existe
     if (posicion == -1) throw "Error: el valor no se ha encontrado en la hoja.";
 
     //Se elimina el valor desplazando elementos
@@ -78,7 +81,7 @@ void ArbolB<T, grado>::Eliminar(T valor){
         Fusionar(hoja, padre, posPadre, valor);
     }
 
-    //Si la raíz está vacia y por alguna razó no tiene hijos, entonces el arbol queda vacio
+    //Si la raíz está vacia y por alguna razon no tiene hijos, entonces el arbol queda vacio
     if (raiz->cantValores == 0 && !raiz->hijo[0]){
         delete raiz;
         raiz = nullptr;
@@ -138,8 +141,9 @@ void ArbolB<T, grado>:: ImprimirDes()const{
 
 template <typename T, int grado>
 void ArbolB<T, grado>::Agregar(T valor, Nodo*& subraiz){
-    if (subraiz->esHoja){
-        //Se inserta un nodo hoja
+
+    if(subraiz->esHoja){
+        //Se inserta un nodo hojaxx|
         int i;
         for (i = subraiz->cantValores - 1; i >= 0 && subraiz->clave[i] > valor; --i){
             subraiz->clave[i + 1] = subraiz->clave[i];
@@ -151,16 +155,15 @@ void ArbolB<T, grado>::Agregar(T valor, Nodo*& subraiz){
         //Si el nodo hoja está lleno esntonces se divide
         if (subraiz->cantValores == grado){
             Split(subraiz);
-            cantClaves++;
+            //por que sumaba la cantidad de claves cuando se divide? si lo va a hacer despues
+            //cantClaves++;
         }
         cantClaves++;
-    }else {
+    }else{
         //Si no se baja por el árbol de forma recursiva
         int i = 0;
         while (i < subraiz->cantValores && valor > subraiz->clave[i]) i++;
         Agregar(valor, subraiz->hijo[i]);
-
-
     }
 
 }
@@ -201,33 +204,48 @@ void ArbolB<T, grado>::Split(Nodo*& subraiz){
     int medio = grado / 2;
     Nodo* nuevoNodo = new Nodo();
     nuevoNodo->esHoja = subraiz->esHoja;
+    T clavePromovida = subraiz->clave[medio];
 
-    //Si es un nodo hoja se mueven los valores
-    if (subraiz->esHoja){
+   //se mueven los valores
+   if(!subraiz->esHoja){
+        for (int i = 0; i < subraiz->cantValores-medio-1; ++i){
+            nuevoNodo->clave[i] = subraiz->clave[i+medio+1];
+        }
+
+        //se recorren los hijos
+
+            for(int i=0;i<=subraiz->cantValores-(medio); ++i){
+                nuevoNodo->hijo[i]=subraiz->hijo[i+medio+1];
+                subraiz->hijo[i+medio+1]=nullptr;
+            }
+            //deberia haber alguna proteccion de los punteros siguente??
+
+            nuevoNodo->cantValores = (subraiz->cantValores - medio)-1;
+            subraiz->cantValores = medio;
+    }else{
         for (int i = medio; i < subraiz->cantValores; ++i){
             nuevoNodo->clave[i - medio] = subraiz->clave[i];
         }
-        nuevoNodo->cantValores = subraiz->cantValores - medio;
-        subraiz->cantValores = medio;
-
         //Se enlazan los nodos hoja
         nuevoNodo->siguiente = subraiz->siguiente;
         subraiz->siguiente = nuevoNodo;
 
-        T clavePromovida = nuevoNodo->clave[0];
-        if (subraiz == raiz){
-            //Si es la raiz pues se crea un nuevo nodo raiz
-            Nodo* nuevaRaiz = new Nodo();
-            nuevaRaiz->clave[0] = clavePromovida;
-            nuevaRaiz->hijo[0] = subraiz;
-            nuevaRaiz->hijo[1] = nuevoNodo;
-            nuevaRaiz->cantValores = 1;
-            raiz = nuevaRaiz;
-        }else {
-            //Si no es la raíz, se sube la clave promovida :p
-            Nodo* padre = BuscarPadre(raiz, subraiz);
-            AgregarPadre(clavePromovida, subraiz, nuevoNodo, padre);
-        }
+            nuevoNodo->cantValores = subraiz->cantValores - medio;
+            subraiz->cantValores = medio;
+    }
+
+    if (subraiz == raiz){
+        //Si es la raiz pues se crea un nuevo nodo raiz
+        Nodo* nuevaRaiz = new Nodo();
+        nuevaRaiz->clave[0] = clavePromovida;
+        nuevaRaiz->hijo[0] = subraiz;
+        nuevaRaiz->hijo[1] = nuevoNodo;
+        nuevaRaiz->cantValores = 1;
+        raiz = nuevaRaiz;
+    }else {
+        //Si no es la raíz, se sube la clave promovida :p
+        Nodo* padre = BuscarPadre(raiz, subraiz);
+        AgregarPadre(clavePromovida, subraiz, nuevoNodo, padre);
     }
 }
 
@@ -450,6 +468,19 @@ void ArbolB<T, grado>::Fusionar(Nodo* nodo, Nodo* padre, int posPadre, T valor){
             nodo->clave[hermano->cantValores] = nodo->clave[i];
             hermano->cantValores++;
         }
+            //Si son nodos hojas se mantiene el enlace entre ellos
+        if (nodo->esHoja){
+            nodo->siguiente = hermano->siguiente;
+        }
+
+         //Se actualiza el nodo padre eliminando la clave que se acaba de fusionar
+        for (int i = posPadre; i < padre->cantValores - 1; ++i){
+            padre->clave[i] = padre->clave[i + 1];
+            padre->hijo[i + 1] = padre->hijo[i + 2];
+        }
+
+        padre->cantValores--;
+        delete hermano;
 
     }else{
         //se elimina el valor del nodo
