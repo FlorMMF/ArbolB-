@@ -29,15 +29,15 @@ int main()
         cout << endl;
         cout<<"Buscando valor: " <<boolalpha<< arbol.Buscar(10)<<endl;
 
-//        cout << "\n=== Prueba de Eliminaci\242n ===" << endl;
-//        int eliminarValores[] = {6,10, 12, 20};
-//        for (int val : eliminarValores) {
-//            cout << "Eliminando: " << val << endl;
-//            arbol.Eliminar(val);
-//            arbol.ImprimirNivel();
-//            cout << "Claves en el \240rbol: " << arbol.ObtenerNumClaves() << endl;
-//            cout << endl;
-//        }
+        cout << "\n=== Prueba de Eliminaci\242n ===" << endl;
+        int eliminarValores[] = {11,33,10};
+        for (int val : eliminarValores) {
+            cout << "Eliminando: " << val << endl;
+            arbol.Eliminar(val);
+            arbol.ImprimirNivel();
+            cout << "Claves en el \240rbol: " << arbol.ObtenerNumClaves() << endl;
+            cout << endl;
+        }
 
         cout << "\n=== Copiar un \240rbol ===" << endl;
         arbol2 = arbol;

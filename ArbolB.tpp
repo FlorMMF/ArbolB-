@@ -64,24 +64,44 @@ void ArbolB<T, grado>::Eliminar(T valor){
 
     //si no encontramos la clave en la hoja la clave no existe
     if (posicion == -1) throw "Error: el valor no se ha encontrado en la hoja.";
-
-    //Se elimina el valor desplazando elementos
+    Nodo* padre = BuscarPadre(raiz, hoja);
     for (int i = posicion; i < hoja->cantValores - 1; ++i){
-        hoja->clave[i] = hoja->clave[i + 1];
+            hoja->clave[i] = hoja->clave[i + 1];
+        }
+        hoja->cantValores--;
+
+
+        //se busca la posicion del padre
+    int posPadre=BuscarPosPadre(hoja, padre);
+    //Se elimina el valor desplazando elementos
+    if(posicion == 0){
+        padre -> clave[posPadre ] = hoja->clave[0];
     }
-    hoja->cantValores--;
 
     //Si queda por debajo del minimo permitido se distribuye o fusiona
     if (hoja->cantValores < (grado - 1) / 2 && hoja != raiz){
-        Nodo* padre = BuscarPadre(raiz, hoja);
 
-            //se busca la posicion del padre
-        int posPadre=BuscarPosPadre(hoja, padre);
-        if(padre -> hijo[posPadre] -> cantValores > (grado -1)/2 || padre -> hijo[posPadre + 2] -> cantValores > (grado -1)/2 ){
-            Redistribuir(hoja, padre, posPadre);
+        if(padre -> hijo[0] == hoja){
 
+            if(padre -> hijo[1] -> cantValores < ( (grado-1) / 2 )){
+                Fusionar(hoja, padre, posPadre, valor);
+            }else{
+                Redistribuir(hoja, padre, posPadre);
+            }
+        }else if(padre -> hijo[padre -> cantValores] == hoja){
+
+            if(padre -> hijo[posPadre] -> cantValores < ( (grado-1) / 2 )){
+                Fusionar(hoja, padre, posPadre, valor);
+            }else{
+                Redistribuir(hoja, padre, posPadre);
+            }
         }else{
-            Fusionar(hoja, padre, posPadre, valor);
+            if(padre -> hijo[posPadre] -> cantValores >= ( (grado-1) / 2 ) || padre -> hijo[posPadre + 2] -> cantValores>= ( (grado-1) / 2 )){
+                Redistribuir(hoja, padre, posPadre);
+            }else{
+                Fusionar(hoja, padre, posPadre, valor);
+            }
+
         }
 
     }
@@ -457,9 +477,6 @@ void ArbolB<T, grado>::Redistribuir(Nodo* nodo, Nodo* padre, int posPadre) {
             return;
         }
     }
-
-    // Se fusiona si no se puede redistribuir
-    //Fusionar(nodo, padre, posPadre, valor);
 }
 
 
@@ -469,6 +486,7 @@ void ArbolB<T, grado>::Fusionar(Nodo* nodo, Nodo* padre, int posPadre, T valor){
 
     if(nodo == padre -> hijo[0]){
     //si el nodo es el primero y por lo tanto el hermano es el derecho y no el izquierdo
+
         for (int i = 0; i < nodo->cantValores; ++i){
             nodo->clave[hermano->cantValores] = nodo->clave[i];
             hermano->cantValores++;
@@ -550,6 +568,6 @@ int ArbolB<T, grado>::BuscarPosPadre(Nodo*  Hijo, Nodo* padre){
 
     if (posPadre == -1) {
         throw "Error: No se pudo encontrar la posici\243n del nodo en su padre.";
-    }else return posPadre;
+    }else return posPadre -1;
 
 }
