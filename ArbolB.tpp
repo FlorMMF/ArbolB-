@@ -141,8 +141,9 @@ void ArbolB<T, grado>:: ImprimirDes()const{
 
 template <typename T, int grado>
 void ArbolB<T, grado>::Agregar(T valor, Nodo*& subraiz){
-    if (subraiz->esHoja){
-        //Se inserta un nodo hoja
+
+    if(subraiz->esHoja){
+        //Se inserta un nodo hojaxx|
         int i;
         for (i = subraiz->cantValores - 1; i >= 0 && subraiz->clave[i] > valor; --i){
             subraiz->clave[i + 1] = subraiz->clave[i];
@@ -158,13 +159,11 @@ void ArbolB<T, grado>::Agregar(T valor, Nodo*& subraiz){
             //cantClaves++;
         }
         cantClaves++;
-    }else {
+    }else{
         //Si no se baja por el árbol de forma recursiva
         int i = 0;
         while (i < subraiz->cantValores && valor > subraiz->clave[i]) i++;
         Agregar(valor, subraiz->hijo[i]);
-
-
     }
 
 }
@@ -205,32 +204,36 @@ void ArbolB<T, grado>::Split(Nodo*& subraiz){
     int medio = grado / 2;
     Nodo* nuevoNodo = new Nodo();
     nuevoNodo->esHoja = subraiz->esHoja;
+    T clavePromovida = subraiz->clave[medio];
 
    //se mueven los valores
-    for (int i = medio; i < subraiz->cantValores; ++i){
-        nuevoNodo->clave[i - medio] = subraiz->clave[i];
-    }
-
-    //se recorren los hijos
-    if(!subraiz->esHoja){
-        for(int i=0;i<subraiz->cantValores-medio; ++i){
-            nuevoNodo->hijo[i]=subraiz->hijo[i+medio];
-            subraiz->hijo[i+medio]=nullptr;
+   if(!subraiz->esHoja){
+        for (int i = 0; i < subraiz->cantValores-medio-1; ++i){
+            nuevoNodo->clave[i] = subraiz->clave[i+medio+1];
         }
-        //deberia haber alguna proteccion de los punteros siguente??
 
+        //se recorren los hijos
+
+            for(int i=0;i<=subraiz->cantValores-(medio); ++i){
+                nuevoNodo->hijo[i]=subraiz->hijo[i+medio+1];
+                subraiz->hijo[i+medio+1]=nullptr;
+            }
+            //deberia haber alguna proteccion de los punteros siguente??
+
+            nuevoNodo->cantValores = (subraiz->cantValores - medio)-1;
+            subraiz->cantValores = medio;
     }else{
+        for (int i = medio; i < subraiz->cantValores; ++i){
+            nuevoNodo->clave[i - medio] = subraiz->clave[i];
+        }
         //Se enlazan los nodos hoja
         nuevoNodo->siguiente = subraiz->siguiente;
         subraiz->siguiente = nuevoNodo;
+
+            nuevoNodo->cantValores = subraiz->cantValores - medio;
+            subraiz->cantValores = medio;
     }
 
-    nuevoNodo->cantValores = subraiz->cantValores - medio;
-    subraiz->cantValores = medio;
-
-
-
-    T clavePromovida = nuevoNodo->clave[0];
     if (subraiz == raiz){
         //Si es la raiz pues se crea un nuevo nodo raiz
         Nodo* nuevaRaiz = new Nodo();
