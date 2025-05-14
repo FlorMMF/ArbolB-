@@ -18,6 +18,10 @@ int main()
         cout << "\n=== Imprimir en nivel ===" << endl;
         arbol.ImprimirNivel();
 
+        cout<<"\n=== prueba split ==="<<endl;
+        arbol.Agregar(8);
+        arbol.ImprimirNivel();
+
         cout << "\n=== Imprimir en por orden ascendente ===" << endl;
         arbol.ImprimirAsc();
         cout << endl;

@@ -33,3 +33,20 @@
 1746998828 c:\users\lara_\onedrive\documents\uni\4to semestre\estructura de datos\proyecto b+\arbolb-\cola.tpp
 	<iostream>
 
+1747178450 source:c:\users\thinkpad\arbolb-\main.cpp
+	<iostream>
+	"ArbolB.hpp"
+
+1747184671 c:\users\thinkpad\arbolb-\arbolb.hpp
+	"ArbolB.tpp"
+
+1747184695 c:\users\thinkpad\arbolb-\arbolb.tpp
+	"Cola.hpp"
+	<iostream>
+
+1746998239 c:\users\thinkpad\arbolb-\cola.hpp
+	"Cola.tpp"
+
+1746998239 c:\users\thinkpad\arbolb-\cola.tpp
+	<iostream>
+

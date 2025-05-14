@@ -53,6 +53,7 @@ void ArbolB<T, grado>::Eliminar(T valor){
         hoja = hoja->hijo[i];
     }
 
+    //Se busca la posicion de la clave en la hoja que encontramos
     int posicion = -1;
     for (int i = 0; i < hoja->cantValores; ++i){
         if(hoja->clave[i] ==valor){
@@ -60,6 +61,8 @@ void ArbolB<T, grado>::Eliminar(T valor){
             break;
         }
     }
+
+    //si no encontramos la clave en la hoja la clave no existe
     if (posicion == -1) throw "Error: el valor no se ha encontrado en la hoja.";
 
     //Se elimina el valor desplazando elementos
@@ -78,7 +81,7 @@ void ArbolB<T, grado>::Eliminar(T valor){
         Fusionar(hoja, padre, posPadre, valor);
     }
 
-    //Si la raíz está vacia y por alguna razó no tiene hijos, entonces el arbol queda vacio
+    //Si la raíz está vacia y por alguna razon no tiene hijos, entonces el arbol queda vacio
     if (raiz->cantValores == 0 && !raiz->hijo[0]){
         delete raiz;
         raiz = nullptr;
@@ -151,7 +154,8 @@ void ArbolB<T, grado>::Agregar(T valor, Nodo*& subraiz){
         //Si el nodo hoja está lleno esntonces se divide
         if (subraiz->cantValores == grado){
             Split(subraiz);
-            cantClaves++;
+            //por que sumaba la cantidad de claves cuando se divide? si lo va a hacer despues
+            //cantClaves++;
         }
         cantClaves++;
     }else {
@@ -202,32 +206,43 @@ void ArbolB<T, grado>::Split(Nodo*& subraiz){
     Nodo* nuevoNodo = new Nodo();
     nuevoNodo->esHoja = subraiz->esHoja;
 
-    //Si es un nodo hoja se mueven los valores
-    if (subraiz->esHoja){
-        for (int i = medio; i < subraiz->cantValores; ++i){
-            nuevoNodo->clave[i - medio] = subraiz->clave[i];
-        }
-        nuevoNodo->cantValores = subraiz->cantValores - medio;
-        subraiz->cantValores = medio;
+   //se mueven los valores
+    for (int i = medio; i < subraiz->cantValores; ++i){
+        nuevoNodo->clave[i - medio] = subraiz->clave[i];
+    }
 
+    //se recorren los hijos
+    if(!subraiz->esHoja){
+        for(int i=0;i<subraiz->cantValores-medio; ++i){
+            nuevoNodo->hijo[i]=subraiz->hijo[i+medio];
+            subraiz->hijo[i+medio]=nullptr;
+        }
+        //deberia haber alguna proteccion de los punteros siguente??
+
+    }else{
         //Se enlazan los nodos hoja
         nuevoNodo->siguiente = subraiz->siguiente;
         subraiz->siguiente = nuevoNodo;
+    }
 
-        T clavePromovida = nuevoNodo->clave[0];
-        if (subraiz == raiz){
-            //Si es la raiz pues se crea un nuevo nodo raiz
-            Nodo* nuevaRaiz = new Nodo();
-            nuevaRaiz->clave[0] = clavePromovida;
-            nuevaRaiz->hijo[0] = subraiz;
-            nuevaRaiz->hijo[1] = nuevoNodo;
-            nuevaRaiz->cantValores = 1;
-            raiz = nuevaRaiz;
-        }else {
-            //Si no es la raíz, se sube la clave promovida :p
-            Nodo* padre = BuscarPadre(raiz, subraiz);
-            AgregarPadre(clavePromovida, subraiz, nuevoNodo, padre);
-        }
+    nuevoNodo->cantValores = subraiz->cantValores - medio;
+    subraiz->cantValores = medio;
+
+
+
+    T clavePromovida = nuevoNodo->clave[0];
+    if (subraiz == raiz){
+        //Si es la raiz pues se crea un nuevo nodo raiz
+        Nodo* nuevaRaiz = new Nodo();
+        nuevaRaiz->clave[0] = clavePromovida;
+        nuevaRaiz->hijo[0] = subraiz;
+        nuevaRaiz->hijo[1] = nuevoNodo;
+        nuevaRaiz->cantValores = 1;
+        raiz = nuevaRaiz;
+    }else {
+        //Si no es la raíz, se sube la clave promovida :p
+        Nodo* padre = BuscarPadre(raiz, subraiz);
+        AgregarPadre(clavePromovida, subraiz, nuevoNodo, padre);
     }
 }
 
