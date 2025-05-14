@@ -10,7 +10,7 @@ int main()
 
 
         cout << "=== Prueba de Inserci\242n ===" << endl;
-        int valores[] = {10, 20, 5, 6, 15, 30, 25, 35, 3, 7, 12, 17, 22, 27, 32,8,9,11,16,18,2,1,0};
+        int valores[] = {2,4,6,8,10,5,15,20,25,7,14,21,28,35,11,22,33,44,55};
         for (int val : valores) {
             cout << "Agregando: " << val << endl;
             arbol.Agregar(val);

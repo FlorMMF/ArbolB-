@@ -77,8 +77,13 @@ void ArbolB<T, grado>::Eliminar(T valor){
 
             //se busca la posicion del padre
         int posPadre=BuscarPosPadre(hoja, padre);
-        Redistribuir(hoja, padre, posPadre);
-        Fusionar(hoja, padre, posPadre, valor);
+        if(padre -> hijo[posPadre] -> cantValores > (grado -1)/2 || padre -> hijo[posPadre + 2] -> cantValores > (grado -1)/2 ){
+            Redistribuir(hoja, padre, posPadre);
+
+        }else{
+            Fusionar(hoja, padre, posPadre, valor);
+        }
+
     }
 
     //Si la raíz está vacia y por alguna razon no tiene hijos, entonces el arbol queda vacio
