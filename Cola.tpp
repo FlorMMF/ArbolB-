@@ -20,7 +20,7 @@ template <typename Tipo>
 Cola<Tipo> & Cola<Tipo>::operator= (const Cola<Tipo> &v){
     if (this == &v) return *this;
     this ->Vaciar();
-    Elemento *aux = v.primero;
+    Elemento *aux = v.ultimo;
 
     for(int i =0; i < v.numElem ; ++i){
         Encolar(aux -> valor);

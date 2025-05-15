@@ -70,7 +70,7 @@ int main()
         cout << "\tBeltran Zazueta Emily Margarita\n\tMachado Felix Flor Maria\n\tMendoza Moreno Mariana\n\tPeregrina Cazares Elias" << endl;
         cout << "\t\t 16/05/2025" << endl;
 
-        ///*Inserción de datos rand
+        ///*Inserciï¿½n de datos rand
         system("pause");
         system("cls");
 
