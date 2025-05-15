@@ -24,9 +24,9 @@ int main()
 
 
 ///*****************************************MAIN PRUEBAS********************************************
-//
+
 //        cout << "=== Prueba de Inserci\242n ===" << endl;
-//        int valores[] = {10, 20, 5, 6, 15, 30, 25, 35, 3, 7, 12, 17, 22, 27, 32,8,9,11,16,18,2,1,0};
+//        int valores[] = {10, 20, 5, 6, 15, 30, 25, 35, 3, 7, 12, 17, 22, 27, 32,8,9,11,16,18,2,1,0,14};
 //        for (int val : valores) {
 //            cout << "Agregando: " << val << endl;
 //            arbol.Agregar(val);
@@ -45,15 +45,15 @@ int main()
 //        cout << endl;
 //        cout<<"Buscando valor: " <<boolalpha<< arbol.Buscar(10)<<endl;
 //
-////        cout << "\n=== Prueba de Eliminaci\242n ===" << endl;
-////        int eliminarValores[] = {6,10, 12, 20};
-////        for (int val : eliminarValores) {
-////            cout << "Eliminando: " << val << endl;
-////            arbol.Eliminar(val);
-////            arbol.ImprimirNivel();
-////            cout << "Claves en el \240rbol: " << arbol.ObtenerNumClaves() << endl;
-////            cout << endl;
-////        }
+//        cout << "\n=== Prueba de Eliminaci\242n ===" << endl;
+//        int eliminarValores[] = {6,10, 1, 20};
+//        for (int val : eliminarValores) {
+//            cout << "Eliminando: " << val << endl;
+//            arbol.Eliminar(val);
+//            arbol.ImprimirNivel();
+//            cout << "Claves en el \240rbol: " << arbol.ObtenerNumClaves() << endl;
+//            cout << endl;
+//        }
 //
 //        cout << "\n=== Copiar un \240rbol ===" << endl;
 //        arbol2 = arbol;

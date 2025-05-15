@@ -449,17 +449,24 @@ void ArbolB<T, grado>::Redistribuir(Nodo* nodo, Nodo* padre, int posPadre) {
     if (!nodo || !padre) {
         throw "Error: Nodo o padre inv\240lidos";
     }
-    cout << "Pospadreeeee "<<posPadre<< endl; 
     // Intentar redistribuir con el hermano izquierdo
     if (posPadre > 0) {
-        Nodo* hermanoIzq = padre->hijo[posPadre - 1];
+            //nuestro nodo es la posicion del padre+1 tal que su hermano derecho esta en la posicion del padre
+        Nodo* hermanoIzq = padre->hijo[posPadre];
+
         if (hermanoIzq->cantValores > (grado - 1) / 2) {
             // Tomamos la última clave del hermano izquierdo y la movemos al nodo
             for (int i = nodo->cantValores; i > 0; --i) {
                 nodo->clave[i] = nodo->clave[i - 1];
             }
-            nodo->clave[0] = padre->clave[posPadre - 1];
-            padre->clave[posPadre - 1] = hermanoIzq->clave[hermanoIzq->cantValores - 1];
+
+            //actualizamos la primera clave
+            nodo->clave[0] = hermanoIzq->clave[hermanoIzq->cantValores];
+
+            //actualizamos la clave del padre
+            padre->clave[posPadre] = nodo->clave[0];
+
+            //aumentamos y reducimos los indices donde corresponde
             hermanoIzq->cantValores--;
             nodo->cantValores++;
             return;
@@ -468,18 +475,22 @@ void ArbolB<T, grado>::Redistribuir(Nodo* nodo, Nodo* padre, int posPadre) {
 
     // Intentar redistribuir con el hermano derecho
     if (posPadre < padre->cantValores) {
+            //nuestro nodo es el hijoizq del padre tal que es la posicion del padre+1, el hermano derecho de este indice la posicion del padre+2
         Nodo* hermanoDer = padre->hijo[posPadre + 2];
-        hermanoDer->ImprimirNodo();
-        cout<<"cant val= "<<hermanoDer->cantValores<<endl; 
 
         if (hermanoDer->cantValores > (grado - 1) / 2) {
-            cout<<"me voy a matar"<<endl;
-            nodo->clave[nodo->cantValores] = padre->clave[posPadre];
-            padre->clave[posPadre] = hermanoDer->clave[0];
+            //vamos a tomar el primer indice del hermano izq que tiene una copia almacenada en la clave del padre +1
+            nodo->clave[nodo->cantValores] = padre->clave[posPadre+1];
 
+            //actualizamos las claves del padre a la derecha como nos vamos a robar la primera clave va a ser la segunda
+            padre->clave[posPadre+1] = hermanoDer->clave[1];
+
+            //reacomodamos las claves del hermano
             for (int i = 0; i < hermanoDer->cantValores - 1; ++i) {
                 hermanoDer->clave[i] = hermanoDer->clave[i + 1];
             }
+
+            //aumentamos y reducimos los indices donde corresponde
             hermanoDer->cantValores--;
             nodo->cantValores++;
             return;
