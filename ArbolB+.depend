@@ -16,14 +16,16 @@
 1746997312 c:\users\surface\documents\estructura de datos\arbolb+\cola.tpp
 	<iostream>
 
-1747195871 source:c:\users\lara_\onedrive\documents\uni\4to semestre\estructura de datos\proyecto b+\arbolb-\main.cpp
+1747261333 source:c:\users\lara_\onedrive\documents\uni\4to semestre\estructura de datos\proyecto b+\arbolb-\main.cpp
 	<iostream>
+	<cstdlib>
 	"ArbolB.hpp"
+	"CapturaSegura.hpp"
 
-1747154436 c:\users\lara_\onedrive\documents\uni\4to semestre\estructura de datos\proyecto b+\arbolb-\arbolb.hpp
+1747199507 c:\users\lara_\onedrive\documents\uni\4to semestre\estructura de datos\proyecto b+\arbolb-\arbolb.hpp
 	"ArbolB.tpp"
 
-1747195861 c:\users\lara_\onedrive\documents\uni\4to semestre\estructura de datos\proyecto b+\arbolb-\arbolb.tpp
+1747201142 c:\users\lara_\onedrive\documents\uni\4to semestre\estructura de datos\proyecto b+\arbolb-\arbolb.tpp
 	"Cola.hpp"
 	<iostream>
 
@@ -49,4 +51,10 @@
 
 1746998239 c:\users\thinkpad\arbolb-\cola.tpp
 	<iostream>
+
+1746588934 source:c:\users\lara_\onedrive\documents\uni\4to semestre\estructura de datos\proyecto b+\arbolb-\capturasegura.cpp
+	<iostream>
+	<limits>
+
+1746588934 c:\users\lara_\onedrive\documents\uni\4to semestre\estructura de datos\proyecto b+\arbolb-\capturasegura.hpp
 
