@@ -68,3 +68,30 @@
 
 1747338168 c:\users\thinkpad\arbolb-\capturasegura.hpp
 
+1747340053 source:c:\users\dell\documents\flor\lcc\cuarto semestre\estructuradatos\arbolb-\capturasegura.cpp
+	<iostream>
+	<limits>
+
+1747345416 source:c:\users\dell\documents\flor\lcc\cuarto semestre\estructuradatos\arbolb-\main.cpp
+	<iostream>
+	<cstdlib>
+	<stdlib.h>
+	<time.h>
+	"ArbolB.hpp"
+	"CapturaSegura.hpp"
+
+1747340053 c:\users\dell\documents\flor\lcc\cuarto semestre\estructuradatos\arbolb-\arbolb.hpp
+	"ArbolB.tpp"
+
+1747345879 c:\users\dell\documents\flor\lcc\cuarto semestre\estructuradatos\arbolb-\arbolb.tpp
+	"Cola.hpp"
+	<iostream>
+
+1747109417 c:\users\dell\documents\flor\lcc\cuarto semestre\estructuradatos\arbolb-\cola.hpp
+	"Cola.tpp"
+
+1747340053 c:\users\dell\documents\flor\lcc\cuarto semestre\estructuradatos\arbolb-\cola.tpp
+	<iostream>
+
+1747340053 c:\users\dell\documents\flor\lcc\cuarto semestre\estructuradatos\arbolb-\capturasegura.hpp
+

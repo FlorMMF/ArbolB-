@@ -16,7 +16,7 @@ int main()
 //    int v;
     try{
 
-        ArbolB<int, 5> arbol, arbol2, ar;
+        ArbolB<int, 3> arbol, arbol2, ar;
         ArbolB<double,5> ad;
         ArbolB<char,5> ac;
         ArbolB<string,5> as;
@@ -82,10 +82,16 @@ int main()
 //        }
 //        arbol.ImprimirNivel();
 
-/*
+
+         cout << "=== Prueba de Inserci\242n ===" << endl;
+        int valores[] = {2,4,6,8,10,5,15,20,25,7,14,21,28,35,11,22,33,44,55};
+        for (int val : valores) {
+            cout << "Agregando: " << val << endl;
+            arbol.Agregar(val);
+        }
         cout << "\n=== Prueba de Eliminaci\242n ===" << endl;
-        //int eliminarValores[] = {11,33,15,21,44,25};
-        int eliminarValores[] = {11,33,5,7,8};
+
+        int eliminarValores[] = {11,33,5,7,15,20};
         for (int val : eliminarValores) {
             cout << "Eliminando: " << val << endl;
             arbol.Eliminar(val);
@@ -93,96 +99,102 @@ int main()
             cout << "Claves en el \240rbol: " << arbol.ObtenerNumClaves() << endl;
             cout << endl;
         }
-    */
+        arbol.Agregar(27);
+        cout << "Eliminando: " << 21 << endl;
+            arbol.Eliminar(21);
+            arbol.ImprimirNivel();
+            cout << "Claves en el \240rbol: " << arbol.ObtenerNumClaves() << endl;
+            cout << endl;
+
 ///****************************************IDEA 1 MAIN (INT)***************************************
-
-        do{
-
-                cout <<endl<< "-----MENU-----" << endl;
-                cout << "\n>INSERTAR Y BORRAR" << endl;
-                cout << "*Agregar [" <<AGREGAR << "] " <<endl;
-                cout << "*Eliminar [" << ELIMINAR << "] " << endl;
-                cout << "\n>TIPOS DE IMPRESION" << endl;
-                cout << "*Por niveles ["<<NIVELES<<"] " << endl;
-                cout << "*Ascendentemente [" << ASC << "] "<< endl;
-                cout << "*Descendentemente [" << DES <<"] "<< endl;
-                cout << "\n>BUSCAR" << endl;
-                cout << "*Buscar [" << BUSCAR << "] " << endl;
-                cout << "*Salir [" << SALIR <<"] "<< endl;
-            do{
-                cout << endl ;
-                op=Capturarentero("Ingresar opci\242n ",op);
-                if(op<0 || op>6) throw "Opcion ingresada fuera de rango";
-            }while(op<0 || op>6);
-
-            switch(op){
-                case(AGREGAR):
-                    system("cls");
-                    cout << "Cuantos datos desea ingresar? ";
-                    cin >> cant;
-
-                    for(int i=1; i <= cant;++i){
-                        cout << "Dato a ingresar [" << i << "]: ";
-                        cin >> num;
-                        arbol.Agregar(num);
-                    }
-                    break;
-                case(ELIMINAR):
-                    system("cls");
-                    cout << "Que dato desea eliminar? ";
-                    cin >> num;
-                    arbol.Eliminar(num);
-                    system("pause");
-                    system("cls");
-
-                    break;
-
-                case(NIVELES):
-                    system("cls");
-                    cout << "~~~IMPRESI\340N POR NIVELES~~~" << endl;
-                    arbol.ImprimirNivel();
-                    cout << endl;
-                    system("pause");
-                    system("cls");
-
-                    break;
-                case(ASC):
-                    system("cls");
-                    cout << "~~~IMPRESI\340N ASCENDENTEMENTE~~~" << endl;
-                    arbol.ImprimirAsc();
-                    cout << endl;
-                    system("pause");
-                    system("cls");
-                    break;
-                case(DES):
-                    system("cls");
-                    cout << "~~~IMPRESI\340N DESCENDENTEMENTE~~~" << endl;
-                    arbol.ImprimirDes();
-                    cout << endl;
-                    system("pause");
-                    system("cls");
-                    break;
-                case(BUSCAR):
-                    system("cls");
-                    cout << "~~~BUSQUEDA DE DATOS~~~" << endl;
-                    cout << "Ingrese dato a buscar: ";
-                    cin >> valor;
-                    cout << "Resultado de busqueda: ";
-                    cout <<boolalpha<< arbol.Buscar(valor) ;
-                    cout << endl;
-                    system("pause");
-                    system("cls");
-
-                    break;
-                case(SALIR):
-                    cout << "\n\nSaliendo...";
-                    break;
-
-                default:
-                    cout << "ERROR DE OPCION" << endl;
-            }
-
-        }while(op!=0);
+//
+//        do{
+//
+//                cout <<endl<< "-----MENU-----" << endl;
+//                cout << "\n>INSERTAR Y BORRAR" << endl;
+//                cout << "*Agregar [" <<AGREGAR << "] " <<endl;
+//                cout << "*Eliminar [" << ELIMINAR << "] " << endl;
+//                cout << "\n>TIPOS DE IMPRESION" << endl;
+//                cout << "*Por niveles ["<<NIVELES<<"] " << endl;
+//                cout << "*Ascendentemente [" << ASC << "] "<< endl;
+//                cout << "*Descendentemente [" << DES <<"] "<< endl;
+//                cout << "\n>BUSCAR" << endl;
+//                cout << "*Buscar [" << BUSCAR << "] " << endl;
+//                cout << "*Salir [" << SALIR <<"] "<< endl;
+//            do{
+//                cout << endl ;
+//                op=Capturarentero("Ingresar opci\242n ",op);
+//                if(op<0 || op>6) throw "Opcion ingresada fuera de rango";
+//            }while(op<0 || op>6);
+//
+//            switch(op){
+//                case(AGREGAR):
+//                    system("cls");
+//                    cout << "Cuantos datos desea ingresar? ";
+//                    cin >> cant;
+//
+//                    for(int i=1; i <= cant;++i){
+//                        cout << "Dato a ingresar [" << i << "]: ";
+//                        cin >> num;
+//                        arbol.Agregar(num);
+//                    }
+//                    break;
+//                case(ELIMINAR):
+//                    system("cls");
+//                    cout << "Que dato desea eliminar? ";
+//                    cin >> num;
+//                    arbol.Eliminar(num);
+//                    system("pause");
+//                    system("cls");
+//
+//                    break;
+//
+//                case(NIVELES):
+//                    system("cls");
+//                    cout << "~~~IMPRESI\340N POR NIVELES~~~" << endl;
+//                    arbol.ImprimirNivel();
+//                    cout << endl;
+//                    system("pause");
+//                    system("cls");
+//
+//                    break;
+//                case(ASC):
+//                    system("cls");
+//                    cout << "~~~IMPRESI\340N ASCENDENTEMENTE~~~" << endl;
+//                    arbol.ImprimirAsc();
+//                    cout << endl;
+//                    system("pause");
+//                    system("cls");
+//                    break;
+//                case(DES):
+//                    system("cls");
+//                    cout << "~~~IMPRESI\340N DESCENDENTEMENTE~~~" << endl;
+//                    arbol.ImprimirDes();
+//                    cout << endl;
+//                    system("pause");
+//                    system("cls");
+//                    break;
+//                case(BUSCAR):
+//                    system("cls");
+//                    cout << "~~~BUSQUEDA DE DATOS~~~" << endl;
+//                    cout << "Ingrese dato a buscar: ";
+//                    cin >> valor;
+//                    cout << "Resultado de busqueda: ";
+//                    cout <<boolalpha<< arbol.Buscar(valor) ;
+//                    cout << endl;
+//                    system("pause");
+//                    system("cls");
+//
+//                    break;
+//                case(SALIR):
+//                    cout << "\n\nSaliendo...";
+//                    break;
+//
+//                default:
+//                    cout << "ERROR DE OPCION" << endl;
+//            }
+//
+//        }while(op!=0);
 
 ///****************************************IDEA 2 MAIN(DOUBLE)***************************************
 //    do{

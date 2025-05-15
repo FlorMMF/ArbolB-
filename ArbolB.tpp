@@ -75,7 +75,11 @@ void ArbolB<T, grado>::Eliminar(T valor){
     int posPadre=BuscarPosPadre(hoja, padre);
     //Se elimina el valor desplazando elementos
     if(posicion == 0){
-        padre -> clave[posPadre ] = hoja->clave[0];
+        if(padre -> hijo[0] == hoja){
+            ActualizarAncestro(padre,valor, hoja->clave[posicion]);
+        }else{
+            padre -> clave[posPadre ] = hoja->clave[0];
+        }
     }
 
     //Si queda por debajo del minimo permitido se distribuye o fusiona
@@ -91,7 +95,7 @@ void ArbolB<T, grado>::Eliminar(T valor){
             }
         }else if(padre -> hijo[padre -> cantValores] == hoja){
 
-            if(padre -> hijo[posPadre] -> cantValores < ( (grado-1) / 2 )){
+            if(padre -> hijo[posPadre] -> cantValores <= ( (grado-1) / 2 )){
                 Fusionar(hoja, padre, posPadre, valor, posicion);
             }else{
                 Redistribuir(hoja, padre, posPadre);
@@ -99,7 +103,7 @@ void ArbolB<T, grado>::Eliminar(T valor){
         }else{
 
             if(padre -> hijo[posPadre] -> cantValores > ( (grado-1) / 2 ) || padre -> hijo[posPadre + 2] -> cantValores> ( (grado-1) / 2 )){
-                cout << "entró";
+
                 Redistribuir(hoja, padre, posPadre);
             }else{
 
@@ -564,24 +568,6 @@ void ArbolB<T, grado>::Fusionar(Nodo* nodo, Nodo* padre, int posPadre, T valor, 
    }
 
     ActualizarAncestro(padre,valor, nodo -> clave[posicion]);
-
-//    //Se fusionan claves en el nodo hermano
-//    hermano->clave[hermano->cantValores] = padre->clave[esIzquierdo ? posPadre - 1 : posPadre];
-//    hermano->cantValores++;
-//
-
-
-//    //Si el padre queda por debajo del minimo se intenta redistribuir
-//    if (padre->cantValores < (grado - 1) / 2 && padre != raiz){
-//        Nodo* abuelo = BuscarPadre(raiz, padre);
-//        int posAbuelo= BuscarPosPadre(padre,abuelo);
-//        Redistribuir(padre, abuelo, posAbuelo);
-//    }
-//    //Si la raiz queda vacia se ajusta el arbol
-//    if (padre == raiz && padre->cantValores == 0){
-//        raiz = hermano;
-//        delete padre;
-//    }
 }
 
 template <typename T, int grado>
