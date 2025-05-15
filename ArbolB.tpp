@@ -445,7 +445,7 @@ void ArbolB<T, grado>::Redistribuir(Nodo* nodo, Nodo* padre, int posPadre) {
     if (!nodo || !padre) {
         throw "Error: Nodo o padre inv\240lidos";
     }
-
+    cout << "Pospadreeeee "<<posPadre<< endl; 
     // Intentar redistribuir con el hermano izquierdo
     if (posPadre > 0) {
         Nodo* hermanoIzq = padre->hijo[posPadre - 1];
@@ -464,8 +464,12 @@ void ArbolB<T, grado>::Redistribuir(Nodo* nodo, Nodo* padre, int posPadre) {
 
     // Intentar redistribuir con el hermano derecho
     if (posPadre < padre->cantValores) {
-        Nodo* hermanoDer = padre->hijo[posPadre + 1];
+        Nodo* hermanoDer = padre->hijo[posPadre + 2];
+        hermanoDer->ImprimirNodo();
+        cout<<"cant val= "<<hermanoDer->cantValores<<endl; 
+
         if (hermanoDer->cantValores > (grado - 1) / 2) {
+            cout<<"me voy a matar"<<endl;
             nodo->clave[nodo->cantValores] = padre->clave[posPadre];
             padre->clave[posPadre] = hermanoDer->clave[0];
 
