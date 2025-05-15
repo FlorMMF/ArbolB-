@@ -83,23 +83,27 @@ void ArbolB<T, grado>::Eliminar(T valor){
 
         if(padre -> hijo[0] == hoja){
 
-            if(padre -> hijo[1] -> cantValores < ( (grado-1) / 2 )){
-                Fusionar(hoja, padre, posPadre, valor);
+            if(padre -> hijo[1] -> cantValores <= ( (grado-1) / 2 )){
+
+                Fusionar(hoja, padre, posPadre, valor, posicion);
             }else{
                 Redistribuir(hoja, padre, posPadre);
             }
         }else if(padre -> hijo[padre -> cantValores] == hoja){
 
             if(padre -> hijo[posPadre] -> cantValores < ( (grado-1) / 2 )){
-                Fusionar(hoja, padre, posPadre, valor);
+                Fusionar(hoja, padre, posPadre, valor, posicion);
             }else{
                 Redistribuir(hoja, padre, posPadre);
             }
         }else{
-            if(padre -> hijo[posPadre] -> cantValores >= ( (grado-1) / 2 ) || padre -> hijo[posPadre + 2] -> cantValores>= ( (grado-1) / 2 )){
+
+            if(padre -> hijo[posPadre] -> cantValores > ( (grado-1) / 2 ) || padre -> hijo[posPadre + 2] -> cantValores> ( (grado-1) / 2 )){
+                cout << "entró";
                 Redistribuir(hoja, padre, posPadre);
             }else{
-                Fusionar(hoja, padre, posPadre, valor);
+
+                Fusionar(hoja, padre, posPadre, valor, posicion);
             }
 
         }
@@ -481,41 +485,46 @@ void ArbolB<T, grado>::Redistribuir(Nodo* nodo, Nodo* padre, int posPadre) {
 
 
 template <typename T, int grado>
-void ArbolB<T, grado>::Fusionar(Nodo* nodo, Nodo* padre, int posPadre, T valor){
-    Nodo* hermano = (posPadre == 0 && nodo == padre -> hijo[0]) ? padre->hijo[1] : padre->hijo[posPadre];
-
+void ArbolB<T, grado>::Fusionar(Nodo* nodo, Nodo* padre, int posPadre, T valor, int posicion){
+    Nodo* hermano = (nodo == padre -> hijo[0]) ? padre->hijo[1] : padre->hijo[posPadre];
+    cout << "entra";
     if(nodo == padre -> hijo[0]){
     //si el nodo es el primero y por lo tanto el hermano es el derecho y no el izquierdo
+        for (int i = 0; i < hermano->cantValores; ++i){
+            nodo->clave[nodo->cantValores] = hermano->clave[i];
+            nodo->cantValores++;
 
-        for (int i = 0; i < nodo->cantValores; ++i){
-            nodo->clave[hermano->cantValores] = nodo->clave[i];
-            hermano->cantValores++;
         }
+
             //Si son nodos hojas se mantiene el enlace entre ellos
         if (nodo->esHoja){
             nodo->siguiente = hermano->siguiente;
         }
 
+
          //Se actualiza el nodo padre eliminando la clave que se acaba de fusionar
         for (int i = posPadre; i < padre->cantValores - 1; ++i){
             padre->clave[i] = padre->clave[i + 1];
-            padre->hijo[i + 1] = padre->hijo[i + 2];
+
+        }
+        padre->hijo[0] -> ImprimirNodo();
+        for (int i = 1; i < padre->cantValores; ++i){
+
+            padre->hijo[i ] = padre->hijo[i + 1];
         }
 
         padre->cantValores--;
         delete hermano;
 
     }else{
+        cout <<"nodo: ";
+        nodo->ImprimirNodo();
+        cout<<endl<< "hermano ";
+        hermano->ImprimirNodo();
+        cout<<endl;
+
         //se elimina el valor del nodo
         //si el valor que esta en el nodo es el mismo del padre se reemplaza primero
-        if(valor == padre -> clave[posPadre]){
-            padre -> clave[posPadre] = nodo -> clave[1];
-            for (int i = 0; i < nodo->cantValores - 1; ++i){
-                nodo->clave[i] = nodo->clave[i + 1];
-            }
-            --(nodo->cantValores);
-        }
-
         for(int i = 0; i < nodo->cantValores; ++i){
             hermano->clave[hermano->cantValores] = nodo->clave[i];
             hermano->cantValores++;
@@ -529,12 +538,17 @@ void ArbolB<T, grado>::Fusionar(Nodo* nodo, Nodo* padre, int posPadre, T valor){
             padre->clave[i] = padre->clave[i + 1];
             padre->hijo[i + 1] = padre->hijo[i + 2];
         }
+        for (int i = posPadre; i < padre->cantValores; ++i){
+
+            padre->hijo[i ] = padre->hijo[i ];
+        }
 
         padre->cantValores--;
         delete nodo;
 
    }
 
+    ActualizarAncestro(padre,valor, nodo -> clave[posicion]);
 
 //    //Se fusionan claves en el nodo hermano
 //    hermano->clave[hermano->cantValores] = padre->clave[esIzquierdo ? posPadre - 1 : posPadre];
@@ -569,5 +583,22 @@ int ArbolB<T, grado>::BuscarPosPadre(Nodo*  Hijo, Nodo* padre){
     if (posPadre == -1) {
         throw "Error: No se pudo encontrar la posici\243n del nodo en su padre.";
     }else return posPadre -1;
+
+}
+
+
+template <typename T, int grado>
+void ArbolB<T, grado>:: ActualizarAncestro(Nodo * padre, T valor, T reemplazo){
+    for(int i = 0 ; i <  padre -> cantValores; ++i){
+        if(padre -> clave[i] == valor){
+            cout <<"se actualiza el valor"<<endl;
+            padre -> clave[i] = reemplazo;
+            return;
+        }
+    }
+    if(padre != raiz){
+        ActualizarAncestro(BuscarPadre(raiz, padre), valor, reemplazo);
+    }
+    return;
 
 }

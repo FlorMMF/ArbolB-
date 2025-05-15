@@ -30,7 +30,7 @@ int main()
         cout<<"Buscando valor: " <<boolalpha<< arbol.Buscar(10)<<endl;
 
         cout << "\n=== Prueba de Eliminaci\242n ===" << endl;
-        int eliminarValores[] = {11,33,10};
+        int eliminarValores[] = {11,33,15,21,44,25};
         for (int val : eliminarValores) {
             cout << "Eliminando: " << val << endl;
             arbol.Eliminar(val);
