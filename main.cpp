@@ -65,8 +65,9 @@ int main()
 //        cout << "Claves despu\202s de vaciar: " << arbol.ObtenerNumClaves() << endl;
 
 ///****************************Intro el proyecto****************************
+
         cout << "~~~~~PROYECTO DE ESTRUCTURA DE DATOS~~~~~" << endl;
-        cout << "\t\tARBOL B+ \n" << endl;
+        cout << "\t\t\265RBOL B+ \n" << endl;
         cout << "\t\tEquipo:" << endl;
         cout << "\tBeltran Zazueta Emily Margarita\n\tMachado Felix Flor Maria\n\tMendoza Moreno Mariana\n\tPeregrina Cazares Elias" << endl;
         cout << "\t\t 16/05/2025" << endl;
@@ -105,7 +106,8 @@ int main()
 ///****************************************IDEA 1 MAIN (INT)***************************************
 //
 //        do{
-//
+//          cout << "~~~~~\265rbol B ~~~~~" << endl;
+//          arbol.ImprimirNivel();
 //                cout <<endl<< "-----MENU-----" << endl;
 //                cout << "\n>INSERTAR Y BORRAR" << endl;
 //                cout << "*Agregar [" <<AGREGAR << "] " <<endl;
@@ -195,93 +197,95 @@ int main()
 
 ///****************************************IDEA 2 MAIN(DOUBLE)***************************************
     do{
+        cout << "~~~~~\265rbol B ~~~~~" << endl;
+        ad.ImprimirNivel();
 
-                cout <<endl<< "-----MENU-----" << endl;
-                cout << "\n>INSERTAR Y BORRAR" << endl;
-                cout << "*Agregar [" <<AGREGAR << "] " <<endl;
-                cout << "*Eliminar [" << ELIMINAR << "] " << endl;
-                cout << "\n>TIPOS DE IMPRESION" << endl;
-                cout << "*Por niveles ["<<NIVELES<<"] " << endl;
-                cout << "*Ascendentemente [" << ASC << "] "<< endl;
-                cout << "*Descendentemente [" << DES <<"] "<< endl;
-                cout << "\n>BUSCAR" << endl;
-                cout << "*Buscar [" << BUSCAR << "] " << endl;
-                cout << "*Salir [" << SALIR <<"] "<< endl;
-            do{
-                cout << endl ;
-                op=Capturarentero("Ingresar opci\242n ",op);
-                if(op<0 || op>6) throw "Opcion ingresada fuera de rango";
-            }while(op<0 || op>6);
+        cout <<endl<< "-----MENU-----" << endl;
+        cout << "\n>INSERTAR Y BORRAR" << endl;
+        cout << "*Agregar [" <<AGREGAR << "] " <<endl;
+        cout << "*Eliminar [" << ELIMINAR << "] " << endl;
+        cout << "\n>TIPOS DE IMPRESION" << endl;
+        cout << "*Por niveles ["<<NIVELES<<"] " << endl;
+        cout << "*Ascendentemente [" << ASC << "] "<< endl;
+        cout << "*Descendentemente [" << DES <<"] "<< endl;
+        cout << "\n>BUSCAR" << endl;
+        cout << "*Buscar [" << BUSCAR << "] " << endl;
+        cout << "*Salir [" << SALIR <<"] "<< endl;
+        do{
+            cout << endl ;
+            op=Capturarentero("Ingresar opci\242n ",op);
+            if(op<0 || op>6) throw "Opcion ingresada fuera de rango";
+        }while(op<0 || op>6);
 
-            switch(op){
-                case(AGREGAR):
-                    system("cls");
-                    cout << "Cuantos datos desea ingresar? ";
-                    cin >> cant;
+        switch(op){
+            case(AGREGAR):
+                system("cls");
+                cout << "Cuantos datos desea ingresar? ";
+                cin >> cant;
 
-                    for(int i=1; i <= cant;++i){
-                        cout << "Dato a ingresar [" << i << "]: ";
-                        cin >> num;
-                        ad.Agregar(num);
-                    }
-                    break;
-                case(ELIMINAR):
-                    system("cls");
-                    cout << "Que dato desea eliminar? ";
+                for(int i=1; i <= cant;++i){
+                    cout << "Dato a ingresar [" << i << "]: ";
                     cin >> num;
-                    ad.Eliminar(num);
-                    system("pause");
-                    system("cls");
+                    ad.Agregar(num);
+                }
+                break;
+            case(ELIMINAR):
+                system("cls");
+                cout << "Que dato desea eliminar? ";
+                cin >> num;
+                ad.Eliminar(num);
+                system("pause");
+                system("cls");
 
-                    break;
+                break;
 
-                case(NIVELES):
-                    system("cls");
-                    cout << "Cantidad de claves: " << ad.ObtenerNumClaves() << endl;
-                    cout << "~~~IMPRESI\340N POR NIVELES~~~" << endl;
-                    ad.ImprimirNivel();
-                    cout << endl;
-                    system("pause");
-                    system("cls");
+            case(NIVELES):
+                system("cls");
+                cout << "Cantidad de claves: " << ad.ObtenerNumClaves() << endl;
+                cout << "~~~IMPRESI\340N POR NIVELES~~~" << endl;
+                ad.ImprimirNivel();
+                cout << endl;
+                system("pause");
+                system("cls");
 
-                    break;
-                case(ASC):
-                    system("cls");
-                    cout << "~~~IMPRESI\340N ASCENDENTEMENTE~~~" << endl;
-                    ad.ImprimirAsc();
-                    cout << endl;
-                    system("pause");
-                    system("cls");
-                    break;
-                case(DES):
-                    system("cls");
-                    cout << "~~~IMPRESI\340N DESCENDENTEMENTE~~~" << endl;
-                    ad.ImprimirDes();
-                    cout << endl;
-                    system("pause");
-                    system("cls");
-                    break;
-                case(BUSCAR):
-                    system("cls");
-                    cout << "~~~BUSQUEDA DE DATOS~~~" << endl;
-                    cout << "Ingrese dato a buscar: ";
-                    cin >> valor;
-                    cout << "Resultado de busqueda: ";
-                    cout <<boolalpha<< ad.Buscar(valor) ;
-                    cout << endl;
-                    system("pause");
-                    system("cls");
+                break;
+            case(ASC):
+                system("cls");
+                cout << "~~~IMPRESI\340N ASCENDENTEMENTE~~~" << endl;
+                ad.ImprimirAsc();
+                cout << endl;
+                system("pause");
+                system("cls");
+                break;
+            case(DES):
+                system("cls");
+                cout << "~~~IMPRESI\340N DESCENDENTEMENTE~~~" << endl;
+                ad.ImprimirDes();
+                cout << endl;
+                system("pause");
+                system("cls");
+                break;
+            case(BUSCAR):
+                system("cls");
+                cout << "~~~BUSQUEDA DE DATOS~~~" << endl;
+                cout << "Ingrese dato a buscar: ";
+                cin >> valor;
+                cout << "Resultado de busqueda: ";
+                cout <<boolalpha<< ad.Buscar(valor) ;
+                cout << endl;
+                system("pause");
+                system("cls");
 
-                    break;
-                case(SALIR):
-                    cout << "\n\nSaliendo...";
-                    break;
+                break;
+            case(SALIR):
+                cout << "\n\nSaliendo...";
+                break;
 
-                default:
-                    cout << "ERROR DE OPCION" << endl;
-            }
+            default:
+                cout << "ERROR DE OPCION" << endl;
+        }
 
-        }while(op!=0);
+    }while(op!=0);
 
 ///****************************************IDEA 3 MAIN(CHAR)***************************************
 //    do{

@@ -334,11 +334,14 @@ void ArbolB<T, grado>::Vaciar(Nodo*& nodo){
 
 template <typename T, int grado>
 void ArbolB<T, grado>::Nodo::ImprimirNodo() const{
-    std::cout << '[';
-    for (int i = 0; i < cantValores; ++i){
-        std::cout << clave[i] << ", ";
+    if(cantValores != 0){
+        std::cout << '[';
+        for (int i = 0; i < cantValores; ++i){
+            std::cout << clave[i] << ", ";
+        }
+        std::cout <<"\b\b] ";
     }
-    std::cout <<"\b\b] ";
+
 }
 
 template <typename T, int grado>
@@ -664,7 +667,7 @@ void ArbolB<T, grado>::FusionarInterno(Nodo * padre, int ind){
     Nodo* hermano=padre->hijo[ind + 1];
 
     // Copiamos claves del hermano
-    if(hermano->cantValores=0){
+    if( (hermano->cantValores) ==0){
         for(int i=0; i<padre->cantValores; ++i){
             hijo->clave[hijo->cantValores+1+i]=padre->clave[i];
         }
