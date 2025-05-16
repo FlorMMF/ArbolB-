@@ -107,7 +107,7 @@ private:
         void ImprimirNodo() const;
         Nodo * copiarRama(Nodo * subraiz);
     };
-    int cantClaves;
+    int cantClaves,clavesHojas;
     Nodo * raiz;
 
     /** \brief Agrega un valor en cierto nodo en especifico
