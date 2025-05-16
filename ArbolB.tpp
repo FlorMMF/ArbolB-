@@ -668,7 +668,16 @@ void ArbolB<T, grado>::FusionarInterno(Nodo * padre, int ind){
     Nodo* hermano=padre->hijo[ind + 1];
 
     // Copiamos claves del hermano
-    for (int i=0; i<hermano->cantValores; ++i) hijo->clave[hijo->cantValores+1+i]=hermano->clave[i];
+    hermano->ImprimirNodo();
+    if(hermano->cantValores=0){
+        for(int i=0; i<padre->cantValores; ++i){
+            hijo->clave[hijo->cantValores+1+i]=padre->clave[i];
+        }
+    }else{
+        for(int i=0; i<hermano->cantValores; ++i){
+            hijo->clave[hijo->cantValores+1+i]=hermano->clave[i];
+        }
+    }
 
     // Copiamos el arreglo de hijos por que no es hoja
     for (int i=0; i<=hermano->cantValores; ++i) hijo->hijo[hijo->cantValores+1+i]=hermano->hijo[i];

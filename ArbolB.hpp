@@ -132,8 +132,6 @@ private:
      *
     */
     void Split(Nodo *& subraiz);
-
-    void SplitInter(Nodo *& subraiz);
     /** \brief Encuentra el nodo padre de un nodo dado en el &aacute;rbol.
      *
      * \param actual Nodo*, Nodo desde el cual comienza la b&uacute;squeda.
