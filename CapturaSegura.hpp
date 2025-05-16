@@ -11,7 +11,7 @@
 
 /** \brief Captura un double de manera segura sin aceptar caracteres
  *
- * \param solicitud[] const char mensaje que se imprimirá cuando haya u error
+ * \param solicitud[] const char mensaje que se imprimirï¿½ cuando haya u error
  * \param m double el numero que se quiere leer
  * \return double el numero cuando se capture exitosametne
  *
@@ -22,7 +22,7 @@ double CapturarDouble(const char solicitud[], double m);
 
 /** \brief Captura un entero de manera segura sin aceptar caracteres
  *
- * \param solicitud[] const char mensaje que se imprimirá cuando haya u error
+ * \param solicitud[] const char mensaje que se imprimirï¿½ cuando haya u error
  * \param m int el numero que se quiere leer
  * \return int el numero cuando se capture exitosametne
  *
