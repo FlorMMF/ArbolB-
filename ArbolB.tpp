@@ -457,15 +457,26 @@ void ArbolB<T, grado>::Redistribuir(Nodo* nodo, Nodo* padre, int posPadre){
         Nodo* hermanoIzq = padre->hijo[posPadre];
 
         if (hermanoIzq->cantValores > (grado - 1) / 2) {
-            // Tomamos la última clave del hermano izquierdo y la movemos al nodo
+            //recorremos las claves del nodo para aceptar una al inicio
             for (int i = nodo->cantValores; i > 0; --i) {
                 nodo->clave[i] = nodo->clave[i - 1];
             }
 
+            //recorremos los hijos para aceptar uno al inicio
+            if(!nodo->esHoja){
+                for(int i=nodo->cantValores+1;i>0; --i){
+                    nodo->hijo[i]=nodo->hijo[i-1];
+                }
 
+            }
 
             //actualizamos la primera clave
             nodo->clave[0] = hermanoIzq->clave[hermanoIzq->cantValores];
+
+            //acualizamos el primer hijo
+            if(!nodo->esHoja){
+                nodo->hijo[0]= hermanoIzq->hijo[hermanoIzq->cantValores];
+            }
 
             //actualizamos la clave del padre
             padre->clave[posPadre] = nodo->clave[0];
@@ -486,12 +497,22 @@ void ArbolB<T, grado>::Redistribuir(Nodo* nodo, Nodo* padre, int posPadre){
             //vamos a tomar el primer indice del hermano izq que tiene una copia almacenada en la clave del padre +1
             nodo->clave[nodo->cantValores] = padre->clave[posPadre+1];
 
+            if(!nodo->esHoja) nodo->hijo[nodo->cantValores+1]=hermanoDer->hijo[0];
+
             //actualizamos las claves del padre a la derecha como nos vamos a robar la primera clave va a ser la segunda
             padre->clave[posPadre+1] = hermanoDer->clave[1];
+
 
             //reacomodamos las claves del hermano
             for (int i = 0; i < hermanoDer->cantValores - 1; ++i) {
                 hermanoDer->clave[i] = hermanoDer->clave[i + 1];
+            }
+
+            if(!hermanoDer->esHoja){
+                    //reacomodamos los hojos del hermano
+                for (int i = 0; i < hermanoDer->cantValores; ++i){
+                    hermanoDer->hijo[i] = hermanoDer->hijo[i + 1];
+                }
             }
 
             //aumentamos y reducimos los indices donde corresponde
