@@ -513,7 +513,7 @@ void ArbolB<T, grado>::Redistribuir(Nodo* nodo, Nodo* padre, int posPadre) {
 template <typename T, int grado>
 void ArbolB<T, grado>::Fusionar(Nodo* nodo, Nodo* padre, int posPadre, T valor, int posicion){
     Nodo* hermano = (nodo == padre -> hijo[0]) ? padre->hijo[1] : padre->hijo[posPadre];
-    cout << "entra";
+
     if(nodo == padre -> hijo[0]){
     //si el nodo es el primero y por lo tanto el hermano es el derecho y no el izquierdo
         for (int i = 0; i < hermano->cantValores; ++i){
@@ -533,7 +533,6 @@ void ArbolB<T, grado>::Fusionar(Nodo* nodo, Nodo* padre, int posPadre, T valor, 
             padre->clave[i] = padre->clave[i + 1];
 
         }
-        padre->hijo[0] -> ImprimirNodo();
         for (int i = 1; i < padre->cantValores; ++i){
 
             padre->hijo[i ] = padre->hijo[i + 1];
@@ -543,11 +542,6 @@ void ArbolB<T, grado>::Fusionar(Nodo* nodo, Nodo* padre, int posPadre, T valor, 
         delete hermano;
 
     }else{
-        cout <<"nodo: ";
-        nodo->ImprimirNodo();
-        cout<<endl<< "hermano ";
-        hermano->ImprimirNodo();
-        cout<<endl;
 
         //se elimina el valor del nodo
         //si el valor que esta en el nodo es el mismo del padre se reemplaza primero

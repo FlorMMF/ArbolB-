@@ -91,7 +91,7 @@ int main()
         }
         cout << "\n=== Prueba de Eliminaci\242n ===" << endl;
 
-        int eliminarValores[] = {11,33,5,7,15,20};
+        int eliminarValores[] = {11,33,5,7,15,20,21,6};
         for (int val : eliminarValores) {
             cout << "Eliminando: " << val << endl;
             arbol.Eliminar(val);
@@ -99,12 +99,7 @@ int main()
             cout << "Claves en el \240rbol: " << arbol.ObtenerNumClaves() << endl;
             cout << endl;
         }
-        arbol.Agregar(27);
-        cout << "Eliminando: " << 21 << endl;
-            arbol.Eliminar(21);
-            arbol.ImprimirNivel();
-            cout << "Claves en el \240rbol: " << arbol.ObtenerNumClaves() << endl;
-            cout << endl;
+
 
 ///****************************************IDEA 1 MAIN (INT)***************************************
 //
