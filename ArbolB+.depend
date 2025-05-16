@@ -72,7 +72,7 @@
 	<iostream>
 	<limits>
 
-1747345416 source:c:\users\dell\documents\flor\lcc\cuarto semestre\estructuradatos\arbolb-\main.cpp
+1747371126 source:c:\users\dell\documents\flor\lcc\cuarto semestre\estructuradatos\arbolb-\main.cpp
 	<iostream>
 	<cstdlib>
 	<stdlib.h>
@@ -80,10 +80,10 @@
 	"ArbolB.hpp"
 	"CapturaSegura.hpp"
 
-1747340053 c:\users\dell\documents\flor\lcc\cuarto semestre\estructuradatos\arbolb-\arbolb.hpp
+1747371126 c:\users\dell\documents\flor\lcc\cuarto semestre\estructuradatos\arbolb-\arbolb.hpp
 	"ArbolB.tpp"
 
-1747348875 c:\users\dell\documents\flor\lcc\cuarto semestre\estructuradatos\arbolb-\arbolb.tpp
+1747371967 c:\users\dell\documents\flor\lcc\cuarto semestre\estructuradatos\arbolb-\arbolb.tpp
 	"Cola.hpp"
 	<iostream>
 
@@ -93,5 +93,5 @@
 1747340053 c:\users\dell\documents\flor\lcc\cuarto semestre\estructuradatos\arbolb-\cola.tpp
 	<iostream>
 
-1747340053 c:\users\dell\documents\flor\lcc\cuarto semestre\estructuradatos\arbolb-\capturasegura.hpp
+1747361221 c:\users\dell\documents\flor\lcc\cuarto semestre\estructuradatos\arbolb-\capturasegura.hpp
 

@@ -65,18 +65,26 @@ void ArbolB<T, grado>::Eliminar(T valor){
     //si no encontramos la clave en la hoja la clave no existe
     if (posicion == -1) throw "Error: el valor no se ha encontrado en la hoja.";
     Nodo* padre = BuscarPadre(raiz, hoja);
+    int posPadre=BuscarPosPadre(hoja, padre);
     for (int i = posicion; i < hoja->cantValores - 1; ++i){
             hoja->clave[i] = hoja->clave[i + 1];
         }
         hoja->cantValores--;
-
+    if (padre -> hijo[0] == hoja  ){
+            if(posicion == 0){
+                ActualizarAncestro(padre, valor, hoja -> clave[posicion]);
+            }else{
+                padre->clave[posPadre] = hoja -> clave[posicion];
+            }
+        }
 
         //se busca la posicion del padre
-    int posPadre=BuscarPosPadre(hoja, padre);
+
     //Se elimina el valor desplazando elementos
     if(posicion == 0){
         padre -> clave[posPadre ] = hoja->clave[0];
     }
+
 
     //Si queda por debajo del minimo permitido se distribuye o fusiona
     if (hoja->cantValores < (grado - 1) / 2 && hoja != raiz){
@@ -489,7 +497,7 @@ void ArbolB<T, grado>::Redistribuir(Nodo* nodo, Nodo* padre, int posPadre){
     }
 
     // Intentar redistribuir con el hermano derecho
-    if (posPadre < padre->cantValores) {
+    if (posPadre < padre->cantValores-1) {
             //nuestro nodo es el hijoizq del padre tal que es la posicion del padre+1, el hermano derecho de este indice la posicion del padre+2
         Nodo* hermanoDer = padre->hijo[posPadre + 2];
 
@@ -583,16 +591,39 @@ void ArbolB<T, grado>::Fusionar(Nodo* nodo, Nodo* padre, int posPadre, T valor, 
    }
 
 
-   if(padre->cantValores<(grado-1)/2 && padre != raiz){
+    while(padre->cantValores<(grado-1)/2 && padre != raiz){
         Nodo* abuelo = BuscarPadre(raiz, padre);
         int posAbuelo= BuscarPosPadre(padre,abuelo);
+        //Si queda por debajo del minimo permitido se distribuye o fusiona
+        if(abuelo -> hijo[0] == padre){
 
-        FusionarInterno(abuelo, posAbuelo);
+            if(abuelo -> hijo[1] -> cantValores <= ( (grado-1) / 2 )){
 
+                FusionarInterno(abuelo, posAbuelo);
+            }else{
+                Redistribuir(padre, abuelo, posAbuelo);
+            }
+        }else if(abuelo -> hijo[abuelo -> cantValores] == padre){
 
+            if(abuelo -> hijo[posAbuelo] -> cantValores <= ( (grado-1) / 2 )){
+                FusionarInterno(abuelo, posAbuelo);
+            }else{
+                Redistribuir(padre, abuelo, posAbuelo);
+            }
+        }else{
 
+            if(abuelo -> hijo[posAbuelo] -> cantValores > ( (grado-1) / 2 ) || abuelo -> hijo[posAbuelo + 2] -> cantValores> ( (grado-1) / 2 )){
+                cout << "entró";
+                   Redistribuir(padre, abuelo, posAbuelo);
+            }else{
+
+                FusionarInterno(abuelo, posAbuelo);
+            }
+
+        }
+
+        padre = abuelo;
    }
-
 
 
 
