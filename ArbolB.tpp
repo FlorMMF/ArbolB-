@@ -93,14 +93,14 @@ void ArbolB<T, grado>::Eliminar(T valor){
 
             if(padre -> hijo[1] -> cantValores <= ( (grado-1) / 2 )){
 
-                Fusionar(hoja, padre, posPadre, valor, posicion);
+                Fusionar(hoja, padre, posPadre);
             }else{
                 Redistribuir(hoja, padre, posPadre);
             }
         }else if(padre -> hijo[padre -> cantValores] == hoja){
 
             if(padre -> hijo[posPadre] -> cantValores < ( (grado-1) / 2 )){
-                Fusionar(hoja, padre, posPadre, valor, posicion);
+                Fusionar(hoja, padre, posPadre);
             }else{
                 Redistribuir(hoja, padre, posPadre);
             }
@@ -111,7 +111,7 @@ void ArbolB<T, grado>::Eliminar(T valor){
                 Redistribuir(hoja, padre, posPadre);
             }else{
 
-                Fusionar(hoja, padre, posPadre, valor, posicion);
+                Fusionar(hoja, padre, posPadre);
             }
 
         }
@@ -498,6 +498,7 @@ void ArbolB<T, grado>::Redistribuir(Nodo* nodo, Nodo* padre, int posPadre){
 
     // Intentar redistribuir con el hermano derecho
     if (posPadre < padre->cantValores-1) {
+
             //nuestro nodo es el hijoizq del padre tal que es la posicion del padre+1, el hermano derecho de este indice la posicion del padre+2
         Nodo* hermanoDer = padre->hijo[posPadre + 2];
 
@@ -528,12 +529,15 @@ void ArbolB<T, grado>::Redistribuir(Nodo* nodo, Nodo* padre, int posPadre){
             nodo->cantValores++;
             return;
         }
+
+    }else{
+        Fusionar(nodo, padre,posPadre);
     }
 }
 
 
 template <typename T, int grado>
-void ArbolB<T, grado>::Fusionar(Nodo* nodo, Nodo* padre, int posPadre, T valor, int posicion){
+void ArbolB<T, grado>::Fusionar(Nodo* nodo, Nodo* padre, int posPadre){
     Nodo* hermano = (nodo == padre -> hijo[0]) ? padre->hijo[1] : padre->hijo[posPadre];
 
     if(nodo == padre -> hijo[0]){
