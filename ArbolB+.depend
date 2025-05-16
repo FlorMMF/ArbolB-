@@ -35,7 +35,7 @@
 1746998828 c:\users\lara_\onedrive\documents\uni\4to semestre\estructura de datos\proyecto b+\arbolb-\cola.tpp
 	<iostream>
 
-1747341364 source:c:\users\thinkpad\arbolb-\main.cpp
+1747367437 source:c:\users\thinkpad\arbolb-\main.cpp
 	<iostream>
 	<cstdlib>
 	<stdlib.h>
@@ -46,7 +46,7 @@
 1747362247 c:\users\thinkpad\arbolb-\arbolb.hpp
 	"ArbolB.tpp"
 
-1747364220 c:\users\thinkpad\arbolb-\arbolb.tpp
+1747368511 c:\users\thinkpad\arbolb-\arbolb.tpp
 	"Cola.hpp"
 	<iostream>
 
@@ -66,7 +66,7 @@
 	<iostream>
 	<limits>
 
-1747338168 c:\users\thinkpad\arbolb-\capturasegura.hpp
+1747367437 c:\users\thinkpad\arbolb-\capturasegura.hpp
 
 1747340053 source:c:\users\dell\documents\flor\lcc\cuarto semestre\estructuradatos\arbolb-\capturasegura.cpp
 	<iostream>
