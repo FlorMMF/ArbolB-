@@ -107,7 +107,6 @@ void ArbolB<T, grado>::Eliminar(T valor){
         }else{
 
             if(padre -> hijo[posPadre] -> cantValores > ( (grado-1) / 2 ) || padre -> hijo[posPadre + 2] -> cantValores> ( (grado-1) / 2 )){
-                cout << "entró";
                 Redistribuir(hoja, padre, posPadre);
             }else{
 
@@ -650,7 +649,6 @@ void ArbolB<T, grado>:: ActualizarAncestro(Nodo * padre, T valor, T reemplazo){
 
     for(int i = 0 ; i <  padre -> cantValores; ++i){
         if(padre -> clave[i] == valor){
-            cout <<"se actualiza el valor"<<endl;
             padre -> clave[i] = reemplazo;
             return;
         }
@@ -668,7 +666,6 @@ void ArbolB<T, grado>::FusionarInterno(Nodo * padre, int ind){
     Nodo* hermano=padre->hijo[ind + 1];
 
     // Copiamos claves del hermano
-    hermano->ImprimirNodo();
     if(hermano->cantValores=0){
         for(int i=0; i<padre->cantValores; ++i){
             hijo->clave[hijo->cantValores+1+i]=padre->clave[i];
