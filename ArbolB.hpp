@@ -211,6 +211,9 @@ private:
     void ActualizarAncestro(Nodo * padre, T valor, T reemplazo);
 
 
+    void FusionarInterno(Nodo * padre, int ind);
+
+
 };
 #include "ArbolB.tpp"
 
